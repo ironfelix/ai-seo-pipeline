@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI SEO Pipeline — Методология 2026 | AgentIQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #f7f8fc;
+  --s1:      #ffffff;
+  --s2:      #eef0f6;
+  --s3:      #e4e7f0;
+  --border:  rgba(0,0,0,.08);
+  --border2: rgba(0,0,0,.13);
+  --text:    #111827;
+  --text2:   #4b5563;
+  --text3:   #9ca3af;
+  --blue:    #2563eb;
+  --blue-bg: rgba(37,99,235,.08);
+  --green:   #16a34a;
+  --green-bg:rgba(22,163,74,.08);
+  --gold:    #d97706;
+  --gold-bg: rgba(217,119,6,.08);
+  --red:     #dc2626;
+  --red-bg:  rgba(220,38,38,.08);
+  --r:       12px;
+  --rs:      8px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:15px;-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+strong{font-weight:600}
+code{font-family:'SFMono-Regular',Consolas,monospace;font-size:12.5px;background:var(--s2);border:1px solid var(--border);padding:1px 6px;border-radius:4px;color:var(--text)}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(247,248,252,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-family:'Manrope',sans-serif;font-weight:800;font-size:16px;color:var(--text);letter-spacing:-.3px}
+.logo em{color:var(--blue);font-style:normal}
+.nav-links{display:flex;align-items:center;gap:20px}
+.nav-link{font-size:13px;color:var(--text2);font-weight:500}
+.nav-link:hover{color:var(--text);text-decoration:none}
+.nav-cta{background:var(--blue);color:#fff;padding:7px 18px;border-radius:20px;font-size:13px;font-weight:600}
+.nav-cta:hover{background:#1d4ed8;text-decoration:none}
+
+/* LAYOUT */
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* HERO */
+.hero{padding:64px 0 52px;border-bottom:1px solid var(--border)}
+.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:12px;color:var(--text3)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--blue-bg);border:1px solid rgba(37,99,235,.2);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--blue);letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Manrope',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:900;line-height:1.15;letter-spacing:-.5px;margin-bottom:16px;color:var(--text)}
+.hero p{font-size:17px;color:var(--text2);max-width:700px;line-height:1.75;margin-bottom:28px}
+.hero-meta{display:flex;gap:24px;flex-wrap:wrap}
+.hero-meta-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text3)}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin:40px 0}
+@media(max-width:700px){.stats-row{grid-template-columns:repeat(2,1fr)}}
+.stat-cell{background:var(--s1);padding:20px 20px 18px;text-align:center}
+.stat-num{font-family:'Manrope',sans-serif;font-size:28px;font-weight:900;line-height:1;letter-spacing:-1px;margin-bottom:6px}
+.stat-label{font-size:11px;color:var(--text2);line-height:1.4;letter-spacing:.01em}
+.c-red{color:var(--red)}.c-blue{color:var(--blue)}.c-green{color:var(--green)}.c-gold{color:var(--gold)}
+
+/* CONTENT GRID */
+.content-grid{display:grid;grid-template-columns:240px 1fr;gap:48px;align-items:start;padding:56px 0 80px}
+@media(max-width:820px){.content-grid{grid-template-columns:1fr}}
+
+/* SIDEBAR TOC */
+.toc{position:sticky;top:72px;background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.toc-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:12px}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.toc-list a{font-size:13px;color:var(--text2);display:block;padding:5px 8px;border-radius:6px;line-height:1.4}
+.toc-list a:hover{background:var(--s2);color:var(--text);text-decoration:none}
+.toc-list .toc-sub a{font-size:12px;padding-left:16px;color:var(--text3)}
+@media(max-width:820px){.toc{display:none}}
+
+/* ARTICLE */
+.article h2{font-family:'Manrope',sans-serif;font-size:22px;font-weight:800;color:var(--text);margin:48px 0 16px;padding-top:8px;letter-spacing:-.3px}
+.article h2:first-child{margin-top:0}
+.article h3{font-family:'Manrope',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin:28px 0 10px}
+.article p{margin-bottom:16px;color:var(--text2);line-height:1.8}
+.article ul,.article ol{margin:0 0 16px 0;padding-left:20px;color:var(--text2);line-height:1.8}
+.article li{margin-bottom:6px}
+.article strong{color:var(--text);font-weight:600}
+
+/* CALLOUT */
+.callout{background:var(--s1);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:var(--rs);padding:18px 20px;margin:20px 0;font-size:14px;color:var(--text2);line-height:1.75}
+.callout.gold{border-left-color:var(--gold);background:var(--gold-bg)}
+.callout.green{border-left-color:var(--green);background:var(--green-bg)}
+.callout.red{border-left-color:var(--red);background:var(--red-bg)}
+.callout strong{color:var(--text)}
+
+/* TABLE */
+.table-wrap{overflow-x:auto;margin:20px 0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border2);background:var(--s2)}
+td{padding:11px 14px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;line-height:1.55}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+
+/* SECTION LABEL */
+.section-label{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
+.section-num{width:22px;height:22px;border-radius:50%;background:var(--s2);border:1px solid var(--border2);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text3)}
+
+/* AGENT CARDS */
+.agent-list{display:flex;flex-direction:column;gap:12px;margin:20px 0}
+.agent-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--rs);padding:18px 20px;display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:flex-start}
+.agent-num{font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;line-height:1}
+.agent-cmd{font-family:'SFMono-Regular',Consolas,monospace;font-size:14px;font-weight:700;color:var(--blue);margin-bottom:4px}
+.agent-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:2px 8px;border-radius:10px;margin-left:6px;vertical-align:middle}
+.agent-tag.auto{background:var(--green-bg);color:var(--green)}
+.agent-tag.semi{background:var(--gold-bg);color:var(--gold)}
+.agent-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
+.agent-desc{font-size:13px;color:var(--text2);line-height:1.65}
+.agent-out{font-size:12px;color:var(--text3);margin-top:6px;padding-top:6px;border-top:1px solid var(--border)}
+
+/* GATE LIST */
+.gate-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}
+@media(max-width:600px){.gate-grid{grid-template-columns:1fr}}
+.gate-item{background:var(--s1);border:1px solid var(--border);border-radius:var(--rs);padding:12px 14px;font-size:13px;color:var(--text2);line-height:1.5}
+.gate-item strong{color:var(--text);display:block;margin-bottom:2px;font-size:13px}
+
+/* TACTIC CARDS */
+.tactics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:20px 0}
+@media(max-width:600px){.tactics-grid{grid-template-columns:1fr}}
+.tactic-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--rs);padding:18px 20px}
+.tactic-rank{font-family:'Manrope',sans-serif;font-size:24px;font-weight:900;color:var(--blue);margin-bottom:8px;line-height:1}
+.tactic-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.tactic-lift{font-size:12px;color:var(--green);font-weight:600;margin-bottom:8px}
+.tactic-desc{font-size:13px;color:var(--text2);line-height:1.6}
+
+/* DIVIDER */
+hr{border:none;border-top:1px solid var(--border);margin:36px 0}
+
+/* MOBILE */
+@media(max-width:600px){
+  .nav-links{display:none}
+  .hero{padding:40px 0 36px}
+  .hero h1{font-size:28px}
+  .hero p{font-size:15px}
+  .hero-meta{gap:12px}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .agent-card{grid-template-columns:1fr;gap:6px}
+  .agent-num{display:none}
+  .content-grid{padding:32px 0 48px}
+  .article h2{font-size:19px;margin-top:36px}
+  .cta-block{padding:28px 20px}
+}
+
+/* CTA */
+.cta-block{background:var(--s1);border:1px solid var(--border2);border-radius:var(--r);padding:40px;text-align:center;margin:56px 0 80px}
+.cta-block h2{font-family:'Manrope',sans-serif;font-size:24px;font-weight:800;color:var(--text);margin-bottom:10px}
+.cta-block p{color:var(--text2);margin-bottom:24px;font-size:15px}
+.btn-blue{display:inline-block;background:var(--blue);color:#fff;padding:12px 28px;border-radius:24px;font-weight:700;font-size:14px}
+.btn-blue:hover{background:#1d4ed8;text-decoration:none}
+.btn-ghost{display:inline-block;color:var(--text2);padding:12px 20px;font-size:14px;font-weight:600}
+.btn-ghost:hover{color:var(--text);text-decoration:none}
+
+footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-size:12px;color:var(--text3)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo">Agent<em>IQ</em></div>
+    <div class="nav-links">
+      <a href="#pipeline" class="nav-link">Пайплайн</a>
+      <a href="#geo" class="nav-link">GEO/AEO</a>
+      <a href="geo-aeo-protocol.html" class="nav-link">Протокол GEO →</a>
+    </div>
+    <a href="https://agentiq.ru" class="nav-cta">AgentIQ ↗</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-badge">Методология · 2026</div>
+    <h1>AI SEO Pipeline:<br>архитектура и принципы работы</h1>
+    <p>Как устроен пайплайн из 10 агентов, который строит контент для цитирования в ChatGPT, Perplexity и Яндекс Нейро — и одновременно ранжируется в Google и Яндексе.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Обновлено: июнь 2026
+      </div>
+      <div class="hero-meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        6 разделов · 10 агентов · 17 quality-метрик
+      </div>
+      <div class="hero-meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Google + Яндекс + ChatGPT + Нейро
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="stat-num c-red">−58%</div>
+        <div class="stat-label">CTR позиции №1 после AI Overview · Ahrefs 2025</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num c-blue">0,664</div>
+        <div class="stat-label">Корреляция brand mentions с AIO-цитированием vs 0,218 у backlinks</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num c-green">6–23×</div>
+        <div class="stat-label">Конверсия AI-трафика vs обычная органика · Ahrefs, Webflow</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num c-gold">44%</div>
+        <div class="stat-label">AIO-цитат берутся из первой трети контента · Growth Memo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="wrap">
+  <div class="content-grid">
+
+    <!-- SIDEBAR TOC -->
+    <aside class="toc">
+      <div class="toc-title">Содержание</div>
+      <ul class="toc-list">
+        <li><a href="#context">1. Контекст: почему SEO изменился</a></li>
+        <li class="toc-sub"><a href="#shift">Расцепление рейтингов и кликов</a></li>
+        <li class="toc-sub"><a href="#signals">Новые сигналы ранжирования</a></li>
+        <li><a href="#pipeline">2. Архитектура пайплайна</a></li>
+        <li class="toc-sub"><a href="#agents">10 агентов</a></li>
+        <li class="toc-sub"><a href="#editor-fanout">Редактура: фан-аут 4+1</a></li>
+        <li class="toc-sub"><a href="#state">State file: pipeline.md</a></li>
+        <li><a href="#gates">3. Quality gates</a></li>
+        <li class="toc-sub"><a href="#metrics">17 метрик</a></li>
+        <li class="toc-sub"><a href="#knowledge">Knowledge accumulation</a></li>
+        <li><a href="#geo">4. GEO-стратегия</a></li>
+        <li class="toc-sub"><a href="#princeton">Princeton GEO Paper</a></li>
+        <li class="toc-sub"><a href="#answer-first">Answer-first структура</a></li>
+        <li class="toc-sub"><a href="#schema">Schema markup</a></li>
+        <li><a href="#yandex">5. Яндекс и Нейро</a></li>
+        <li class="toc-sub"><a href="#pf">Поведенческие факторы</a></li>
+        <li class="toc-sub"><a href="#neuro">Яндекс Нейро</a></li>
+        <li><a href="#monitoring">6. Мониторинг</a></li>
+        <li class="toc-sub"><a href="#tracker">Tracker: позиции + AI-цитаты</a></li>
+        <li class="toc-sub"><a href="#optimizer">Page optimizer</a></li>
+      </ul>
+    </aside>
+
+    <!-- ARTICLE -->
+    <article class="article">
+
+      <!-- SECTION 1 -->
+      <div class="section-label"><span class="section-num">1</span> Контекст</div>
+      <h2 id="context">Почему SEO изменился в 2025–2026</h2>
+
+      <div class="callout">
+        <strong>Главный сдвиг:</strong> рейтинги и клики расцепились. AI Overviews покрывают 49,9% поисков Google — CTR позиции №1 упал на 58%. Яндекс Нейро присутствует в 68% информационных запросов. При этом конверсия AI-трафика в 6–23 раза выше обычной органики. Задача изменилась: не просто ранжироваться, а быть процитированным.
+      </div>
+
+      <h3 id="shift">Расцепление рейтингов и кликов</h3>
+      <p>До 2024 года SEO-логика была линейной: выше позиция → больше кликов. AI Overviews нарушили эту связь. Исследование Ahrefs (декабрь 2025, 300 000+ ключей) показало: при наличии AIO позиция №1 теряет 58% кликов относительно SERP без AI-блока. Трафик не исчезает — он перераспределяется к тем, кого цитирует AI.</p>
+
+      <p>Одновременно выявилась ключевая корреляция: <strong>brand mentions коррелируют с AIO-цитированием на уровне 0,664</strong> — против 0,218 у backlinks. Это меняет приоритет с наращивания ссылок на построение присутствия бренда в тематических источниках.</p>
+
+      <h3 id="signals">Новые сигналы ранжирования</h3>
+      <p>Утечка 14 000 атрибутов Content Warehouse API и показания Pandu Nayak на DOJ-процессе подтвердили реальное устройство Google-ранжирования:</p>
+      <ul>
+        <li><strong>NavBoost</strong> — главная система re-ranking по клик-поведению. Поля: <code>goodClicks</code>, <code>badClicks</code>, <code>lastLongestClicks</code>. Последний клик с долгим dwell — сильнейший сигнал. Окно агрегации: 13 месяцев.</li>
+        <li><strong>siteAuthority</strong> — site-wide score, существование которого Google публично отрицал.</li>
+        <li><strong>siteFocusScore + siteRadius</strong> — Google векторизует страницы относительно «ядра темы» сайта. Это прямое подтверждение topical authority как реального фактора ранжирования.</li>
+        <li><strong>Helpful Content System</strong> интегрирован в core ranking с марта 2024. Декабрьский 2025 Core Update: 800 слов с точным ответом на интент обгоняют 3 000-словные гайды.</li>
+      </ul>
+
+      <div class="callout gold">
+        <strong>Следствие для пайплайна:</strong> контент должен закрывать весь кластер тем (query fan-out), а не оптимизироваться под один ключ. Researcher строит кластер из 3–5 суб-запросов, Writer закрывает каждый. Это повышает topical authority и увеличивает вероятность AI-цитирования.
+      </div>
+
+      <hr>
+
+      <!-- SECTION 2 -->
+      <div class="section-label"><span class="section-num">2</span> Архитектура</div>
+      <h2 id="pipeline">Архитектура пайплайна</h2>
+
+      <p>Пайплайн состоит из 10 агентов — специализированных скиллов с чёткой зоной ответственности. 6 работают полностью автономно, 3 требуют подтверждения на ключевых точках. Каждый агент читает и пишет в <code>pipeline.md</code> — единый state file статьи.</p>
+
+      <div class="callout">
+        <strong>Принцип:</strong> агенты не советуют — они блокируют или пропускают. Quality-gate не «рекомендует исправить тире» — он возвращает статью до устранения нарушения. Publisher не публикует без слова «публикуем» в чате.
+      </div>
+
+      <h3 id="agents">10 агентов</h3>
+
+      <div class="agent-list">
+        <div class="agent-card">
+          <div class="agent-num">01</div>
+          <div>
+            <div class="agent-cmd">/researcher <span class="agent-tag auto">авто</span></div>
+            <div class="agent-title">Разведка и построение кластера</div>
+            <div class="agent-desc">Читает топ-10 конкурентов. Строит query fan-out кластер — 3–5 суб-запросов, которые Google разбивает из основного. Проверяет источники по уровням T1/T2/T3 (T3 без конкретных цифр). Выявляет угол, которого нет в топе — без него статья не пишется.</div>
+            <div class="agent-out">→ research/*.md + pipeline.md (шаги 1–3 заполнены)</div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-num">02</div>
+          <div>
+            <div class="agent-cmd">/writer <span class="agent-tag auto">авто</span></div>
+            <div class="agent-title">Черновик с answer-first структурой</div>
+            <div class="agent-desc">Первый абзац — прямой ответ на запрос без вводного «воды». H2 — каждый как самостоятельный поисковый запрос. FAQ с вопросной семантикой из Яндекс Wordstat. Ритм: короткие предложения после длинных блоков. Голос бренда, не ChatGPT-style.</div>
+            <div class="agent-out">→ articles/{slug}/draft.html + pipeline.md шаг 4</div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-num">03</div>
+          <div>
+            <div class="agent-cmd">/editor <span class="agent-tag auto">авто · 4+1</span></div>
+            <div class="agent-title">Редактура: фан-аут 4+1 ревьюера</div>
+            <div class="agent-desc">Не один проход, а оркестратор. Четыре ревьюера читают статью параллельно: Р1 ИИ и стиль (30+ AI-паттернов, кальки, тире ≤8 hard gate), Р2 аудитория и тон (без сужения и пустой категоричности), Р3 структура (дубли блоков, таблицы, FAQ↔тело), Р4 язык и грамматика (висящий глагол, повторы, согласование). Затем Р5 «Живой язык» — читательский проход: добавляет голос «мы», ритм и конкретный образ, чтобы текст не был «правильным, но мёртвым». Свод снимает конфликты, правки летят в Google Doc.</div>
+            <div class="agent-out">→ Google Doc обновлён (точечные replace, картинки целы) + pipeline.md шаг 5</div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-num">04</div>
+          <div>
+            <div class="agent-cmd">/fact-checker <span class="agent-tag auto">авто</span></div>
+            <div class="agent-title">Верификация фактов</div>
+            <div class="agent-desc">Извлекает все верифицируемые утверждения. Маркирует каждое как T1 (оригинальный отчёт), T2 (крупное СМИ со ссылкой), T3 (неверифицирован) или FAIL (недостаточно доказательств). T3 — только размытые формулировки, без цифр. Пополняет knowledge-base.md проверенными фактами.</div>
+            <div class="agent-out">→ _fact-check.md + knowledge-base.md обновлён</div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-num">05</div>
+          <div>
+            <div class="agent-cmd">/quality-gate <span class="agent-tag auto">авто</span></div>
+            <div class="agent-title">17 метрик — PASS/FAIL</div>
+            <div class="agent-desc">Автоматическая проверка перед публикацией. FAIL по любой метрике блокирует статью. Метрики: структурные (H1+TOC+FAQ), языковые (тире, стоп-слова, AI-паттерны), SEO (≥1500 слов, 3–7 внутренних ссылок, Schema), E-E-A-T (кейс, источники, автор). Не рекомендация — ворота.</div>
+            <div class="agent-out">→ _quality-gate.md: PASS или список FAIL с блокировкой</div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-num">06</div>
+          <div>
+            <div class="agent-cmd">/seo-optimizer <span class="agent-tag auto">авто</span></div>
+            <div class="agent-title">SEO-упаковка</div>
+            <div class="agent-desc">Генерирует H1 × 3 варианта, SEO title (50–60 симв.), description (120–155 симв.). Проверяет H2: каждый должен быть самостоятельным поисковым запросом. FAQ из Яндекс Wordstat и Google «Люди также спрашивают». Внутренние ссылки с entity-анкорами. Schema: FAQPage + SpeakableSpecification + Review/SoftwareApplication.</div>
+            <div class="agent-out">→ pipeline.md шаг 8a: H1 / title / desc / cover_tag</div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-num">07</div>
+          <div>
+            <div class="agent-cmd">/publisher <span class="agent-tag semi">подтверждение</span></div>
+            <div class="agent-title">Публикация с human gate</div>
+            <div class="agent-desc">Создаёт Google Doc для финальной проверки редактором — полный текст статьи. Параллельно создаёт WP-черновик. <strong>Полная остановка</strong> — ждёт буквально слово «публикуем» в чате. После — публикация, обновление sitemap.xml, деплой llms.txt на сервер.</div>
+            <div class="agent-out">→ Google Doc + WP post (published) + llms.txt обновлён</div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-num">08</div>
+          <div>
+            <div class="agent-cmd">/designer <span class="agent-tag auto">авто</span></div>
+            <div class="agent-title">Инфографика</div>
+            <div class="agent-desc">Определяет 2–3 места для визуализации. Два режима: если есть <code>data/design-tokens.md</code> → Pencil MCP (клиентская дизайн-система); иначе → HTML→Playwright→PNG (стиль по дефолту). Типы: funnel, steps, stats, canvas. Загружает в WP media и вставляет в контент с lightbox.</div>
+            <div class="agent-out">→ WP media + контент обновлён с инфографикой</div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-num">09</div>
+          <div>
+            <div class="agent-cmd">/tracker <span class="agent-tag auto">авто</span></div>
+            <div class="agent-title">Мониторинг позиций и AI-цитирований</div>
+            <div class="agent-desc">Проверяется через 30 дней после публикации, затем каждые 90. Источники: Яндекс Webmaster API (реальные позиции), GSC API (Google), Perplexity (AI-цитирования), Яндекс Нейро. Фиксирует дельту позиций и генерирует action items для /page-optimizer.</div>
+            <div class="agent-out">→ pipeline.md Tracking log обновлён + action items</div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-num">10</div>
+          <div>
+            <div class="agent-cmd">/page-optimizer <span class="agent-tag semi">по запросу</span></div>
+            <div class="agent-title">Доработка по данным трекера</div>
+            <div class="agent-desc">Читает action items из pipeline.md Tracking log. Дорабатывает статьи в позициях 4–10: добавляет H2-раздел под недостающий ключ, расширяет FAQ, перерабатывает первый абзац для Яндекс AI. Не переписывает — хирургически правит слабые места.</div>
+            <div class="agent-out">→ WP контент обновлён + action items вычеркнуты</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 id="editor-fanout">Редактура как фан-аут: 4+1 ревьюера</h3>
+      <p>Раньше /editor был монолитным проходом — и терял правила: на 60 проверок за один заход что-то всегда проскакивало (висящий глагол, повтор слова, антитеза «X, не Y»). Теперь это оркестратор, как /researcher: четыре ревьюера читают статью <strong>параллельно</strong>, каждый со своим узким блоком, затем свод снимает конфликты и применяет правки точечными заменами — структура и картинки документа не трогаются.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Ревьюер</th><th>Режим</th><th>Что ловит</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Р1 · ИИ и стиль</strong></td><td>вычищает</td><td>AI-конструкции, штампы, кальки, антропоморфизм, тире ≤ 8</td></tr>
+            <tr><td><strong>Р2 · Аудитория и тон</strong></td><td>выверяет</td><td>сужение аудитории, пустая категоричность, снисходительность</td></tr>
+            <tr><td><strong>Р3 · Структура</strong></td><td>выверяет</td><td>дубли блоков, таблицы с оценками, FAQ↔тело, слабый лид</td></tr>
+            <tr><td><strong>Р4 · Язык и грамматика</strong></td><td>выверяет</td><td>висящий глагол, повторы слов, согласование, канцелярит</td></tr>
+            <tr><td><strong>Р5 · Живой язык</strong></td><td>добавляет</td><td>голос «мы», ритм, конкретный образ — против «правильно, но мёртво»</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout green">
+        <strong>Зачем пятый ревьюер:</strong> Р1–Р4 только убирают плохое и проверяют корректность. Текст может пройти все четыре — и остаться гладким, но безжизненным, как методичка. Р5 запускается последним, по уже вычищенному тексту, и отвечает за человеческую фактуру: читается ли это как живой эксперт, а не как генерация. На реальных прогонах он поднимал «человечность» статьи с 7–7,5 до 9 из 10, не добавляя пафоса.
+      </div>
+
+      <h3 id="state">State file: pipeline.md</h3>
+      <p>Каждая статья имеет <code>articles/{slug}/pipeline.md</code> — единый источник правды о её состоянии. Файл создаётся /researcher и обновляется каждым агентом. Publisher проверяет его перед публикацией: если любой из шагов researcher → writer → editor → fact-checker → quality-gate → seo-optimizer в статусе ⏳ или ❌ — публикация заблокирована.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Шаг</th><th>Агент</th><th>Статус</th><th>Что блокирует следующий шаг</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1. Brief</strong></td><td>—</td><td>✅/⏳</td><td>Нет целевого ключа → /researcher не запускается</td></tr>
+            <tr><td><strong>2. Research</strong></td><td>/researcher</td><td>✅/⏳</td><td>Нет уникального угла → /writer не пишет</td></tr>
+            <tr><td><strong>4. Draft</strong></td><td>/writer</td><td>✅/⏳</td><td>—</td></tr>
+            <tr><td><strong>5. Редактура</strong></td><td>/editor</td><td>✅/⏳</td><td>—</td></tr>
+            <tr><td><strong>6. Fact-check</strong></td><td>/fact-checker</td><td>✅/⏳</td><td>Незакрытые [ПРОВЕРИТЬ] → /quality-gate возвращает</td></tr>
+            <tr><td><strong>7. Quality gate</strong></td><td>/quality-gate</td><td>PASS/FAIL</td><td>FAIL → /publisher блокирован</td></tr>
+            <tr><td><strong>8a. SEO pack</strong></td><td>/seo-optimizer</td><td>✅/⏳</td><td>—</td></tr>
+            <tr><td><strong>9. Публикация</strong></td><td>/publisher</td><td>✅/⏳</td><td>Нет «публикуем» → не публикует</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 3 -->
+      <div class="section-label"><span class="section-num">3</span> Quality gates</div>
+      <h2 id="gates">Quality gates: 17 метрик</h2>
+
+      <p>/quality-gate проверяет статью перед публикацией по 17 метрикам. Каждая — PASS или FAIL. При FAIL выводится список нарушений и агент возвращает статью. Никаких «подумайте над этим» — только бинарный результат.</p>
+
+      <h3 id="metrics">Метрики</h3>
+
+      <div class="gate-grid">
+        <div class="gate-item"><strong>Структурные</strong>H1 с целевым ключом + год. TOC-блок с якорями на все H2. FAQ ≥ 4 вопросов с Schema + details/summary.</div>
+        <div class="gate-item"><strong>Объём и ссылки</strong>≥ 1 500 слов. 3–7 внутренних ссылок с descriptive анкорами. ≥ 1 ссылка на релевантную услугу.</div>
+        <div class="gate-item"><strong>Тире — hard gate</strong>≤ 8 тире в статье суммарно (проза + заголовки + таблицы). ≤ 2 тире в абзаце. Считается скриптом, не на глаз.</div>
+        <div class="gate-item"><strong>Стоп-слова = 0</strong>«следует отметить», «важно понимать», «давайте разберёмся», «таким образом», «данный», «является». Каждое = FAIL.</div>
+        <div class="gate-item"><strong>Первый абзац</strong>Не начинается с определения термина из заголовка. Первое предложение — прямой ответ без аббревиатур. AI должен процитировать его без контекста.</div>
+        <div class="gate-item"><strong>E-E-A-T</strong>Есть верифицированный кейс (не шаблон «было/стало»). Источники T1/T2 для конкретных цифр. Нет [ПРОВЕРИТЬ] в тексте.</div>
+        <div class="gate-item"><strong>Schema markup</strong>FAQPage JSON-LD. Опционально: SpeakableSpecification, Review, SoftwareApplication. Проверяется наличие в <code>&lt;script type="application/ld+json"&gt;</code>.</div>
+        <div class="gate-item"><strong>Answer-first</strong>TL;DR-блок (кратко) после H1, до TOC. Оформлен как визуальный блок, не параграф. Содержит прямой ответ, не «в этой статье мы рассмотрим».</div>
+        <div class="gate-item"><strong>Кейс с деталью</strong>Кейс содержит конкретную «грязную деталь» — что именно нашли, что сказал клиент, что было сломано. Только цифры без истории = FAIL.</div>
+      </div>
+
+      <h3 id="knowledge">Knowledge accumulation: флайвил качества</h3>
+      <p>Каждый прогон /fact-checker добавляет верифицированные факты в <code>knowledge-base.md</code> с маркировкой источника и датой. При написании следующей статьи /researcher и /writer читают knowledge-base и опираются на уже проверенные данные — вместо повторной верификации.</p>
+
+      <p>Это решает ключевую проблему масштабирования: <strong>качество верификации не деградирует при росте темпа публикаций.</strong> При батче в 19 статей каждая следующая стартует с более богатой базой, чем предыдущая.</p>
+
+      <div class="callout green">
+        <strong>Практический результат:</strong> батч из 19 статей прошёл полный цикл researcher → publisher за два дня при нулевом снижении качества fact-checking. Knowledge-base накопил 340+ верифицированных утверждений за сессию.
+      </div>
+
+      <hr>
+
+      <!-- SECTION 4 -->
+      <div class="section-label"><span class="section-num">4</span> GEO-стратегия</div>
+      <h2 id="geo">GEO-стратегия: что заставляет LLM цитировать</h2>
+
+      <p>Generative Engine Optimization — отдельная дисциплина от классического SEO. AI-системы выбирают источники по критериям, которые не полностью совпадают с ранжирующими сигналами Google. Princeton GEO Paper — крупнейшее измеренное исследование этих критериев.</p>
+
+      <h3 id="princeton">Princeton GEO Paper: данные</h3>
+      <p>10 000 запросов, Perplexity.ai, метрика PAWC (position-adjusted word count — доля слов в AI-ответе, пришедших из вашего источника). Измерено 10 тактик оптимизации:</p>
+
+      <div class="tactics-grid">
+        <div class="tactic-card">
+          <div class="tactic-rank">+42,6%</div>
+          <div class="tactic-name">Cite Sources</div>
+          <div class="tactic-lift">Наибольший прирост для слабых позиций</div>
+          <div class="tactic-desc">Ссылки на авторитетные источники в тексте. Эффект усилен для сайтов на позициях 5–10 («underdog effect»): +115% PAWC против +40% для топ-3.</div>
+        </div>
+        <div class="tactic-card">
+          <div class="tactic-rank">+32,8%</div>
+          <div class="tactic-name">Statistics</div>
+          <div class="tactic-lift">Конкретные числа вместо общих утверждений</div>
+          <div class="tactic-desc">Вместо «многие исследования показывают» — «73% респондентов согласны (Nielsen, 2025)». LLM предпочитают верифицируемые факты.</div>
+        </div>
+        <div class="tactic-card">
+          <div class="tactic-rank">+28,7%</div>
+          <div class="tactic-name">Fluency</div>
+          <div class="tactic-lift">Короткие, чёткие предложения</div>
+          <div class="tactic-desc">Убрать воду, вводные обороты, пассивный залог. Простые синтаксические конструкции. Это не упрощение — это точность формулировки.</div>
+        </div>
+        <div class="tactic-card">
+          <div class="tactic-rank">+27,7%</div>
+          <div class="tactic-name">Quotations</div>
+          <div class="tactic-lift">Прямые цитаты экспертов</div>
+          <div class="tactic-desc">Верифицированные цитаты с атрибуцией. LLM доверяют контенту с явными источниками больше, чем обобщениям от первого лица.</div>
+        </div>
+      </div>
+
+      <div class="callout red">
+        <strong>Антипаттерн:</strong> keyword stuffing дал <strong>отрицательный результат</strong> в исследовании. Высокая плотность ключевых слов снижает PAWC — AI-системы воспринимают его как сигнал низкого качества.
+      </div>
+
+      <p><strong>Лучшая пара тактик</strong> по данным исследования: Fluency + Statistics = +61,5% PAWC суммарно. Это объясняет, почему quality-gate требует конкретных чисел с источниками и блокирует «воду» в первом абзаце.</p>
+
+      <h3 id="answer-first">Answer-first структура и первая треть</h3>
+      <p>Growth Memo проанализировал 4 000 000 URL на AIO-цитирование. Вывод: <strong>44% AI-цитат берутся из первой трети контента страницы.</strong> Это означает, что первые 400–500 слов определяют большую часть шансов на цитирование — вне зависимости от общей длины статьи.</p>
+
+      <p>Пайплайн закрепляет это системно:</p>
+      <ul>
+        <li>/writer обязан писать первый абзац как прямой ответ — «если вырвать и вставить в AI-ответ, он должен работать без контекста»</li>
+        <li>/quality-gate проверяет TL;DR-блок (визуальный «Кратко» после H1) и блокирует вводные определения</li>
+        <li>/editor убирает вводные обороты из первого абзаца в первую очередь</li>
+      </ul>
+
+      <h3 id="schema">Schema markup и структурированные данные</h3>
+      <p>Authoritas (2025): наличие FAQPage schema повышает вероятность попадания в AI Overview на <strong>+40%</strong> и в 3 раза увеличивает цитирование ChatGPT. /seo-optimizer добавляет:</p>
+      <ul>
+        <li><code>FAQPage</code> — обязательная для всех статей с FAQ-секцией</li>
+        <li><code>SpeakableSpecification</code> — для Яндекс Алисы и голосового поиска</li>
+        <li><code>Review</code> / <code>SoftwareApplication</code> — для сравнительных и обзорных статей</li>
+      </ul>
+
+      <hr>
+
+      <!-- SECTION 5 -->
+      <div class="section-label"><span class="section-num">5</span> Яндекс</div>
+      <h2 id="yandex">Яндекс и Нейро: отдельная игра</h2>
+
+      <p>Яндекс занимает 74% поискового рынка РФ (май 2025). Архитектурно он принципиально отличается от Google — поведенческие сигналы приоритетны над ссылочными, а Нейро работает иначе, чем Google AIO.</p>
+
+      <h3 id="pf">Поведенческие факторы: как это работает</h3>
+      <p>Данные берутся из Яндекс.Метрики, Яндекс.Браузера и кликов в SERP. Ключевой сигнал — <strong>lastLongestClick</strong>: последний клик в сессии с максимальным dwell time. Для влияния нужно 1–2 недели накопления статистики — в отличие от Google NavBoost (окно 13 месяцев).</p>
+
+      <p>Ссылочный вес снижен на ~30% после апдейта 2024. Баден-Баден: плотность ключевых слов выше 5% — санкция. Накрутка ПФ детектируется через DeviceHash и GeoSkew: санкции до потери 90% трафика и обнуления ИКС на ~год.</p>
+
+      <p>ЭПОС — аналог Google E-E-A-T для Яндекса: Экспертность · Полезность · Оригинальность · Своевременность. /quality-gate проверяет соответствие ЭПОС так же, как E-E-A-T.</p>
+
+      <h3 id="neuro">Яндекс Нейро: архитектура и оптимизация</h3>
+      <p>Архитектура: 16 реплик → BERT-ранжирование → выбор ~5 источников → генеративная модель. <strong>Принципиальное отличие от ChatGPT/Gemini: параметрическое знание не используется — только переданные источники.</strong> Нейро всегда цитирует из конкретных страниц.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Параметр</th><th>Яндекс Нейро</th><th>Google AIO</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Источников в ответе</strong></td><td>~5</td><td>~13</td></tr>
+            <tr><td><strong>Охват запросов</strong></td><td>68% информационных</td><td>49,9% всех</td></tr>
+            <tr><td><strong>Связь с органикой</strong></td><td>63% цитат из топ-5</td><td>38% из топ-10 (март 2026)</td></tr>
+            <tr><td><strong>Параметрическое знание</strong></td><td>Не используется</td><td>Частично</td></tr>
+            <tr><td><strong>Платное попадание</strong></td><td>Невозможно</td><td>Невозможно</td></tr>
+            <tr><td><strong>Управление через robots.txt</strong></td><td>YandexAdditional (2–14 дней)</td><td>GPTBot / Google-Extended</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Стратегия для Яндекс Нейро совпадает с классическим SEO: попасть в топ-5 органики → попасть в ответ Нейро → попасть в ответ Алисы. Три цели — одна стратегия.</p>
+
+      <div class="callout">
+        Управление: <code>User-agent: YandexAdditional</code> в robots.txt отключает использование контента в Нейро и Быстрых ответах. Применяется через 2–14 дней. Используется если нежелательно попадание в Нейро (например, для коммерческих страниц без информационного контента).
+      </div>
+
+      <hr>
+
+      <!-- SECTION 6 -->
+      <div class="section-label"><span class="section-num">6</span> Мониторинг</div>
+      <h2 id="monitoring">Мониторинг: позиции и AI-цитирования</h2>
+
+      <p>Публикация — не финальная точка. Через 30 дней /tracker проверяет реальное состояние статьи и формирует action items для /page-optimizer. Затем мониторинг каждые 90 дней.</p>
+
+      <h3 id="tracker">Tracker: что проверяется</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Источник</th><th>Данные</th><th>Метод</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Яндекс Webmaster API</strong></td><td>Позиции по ключам, клики, CTR, impressions</td><td>API query-analytics, период 7 дней минус 3 дня задержки</td></tr>
+            <tr><td><strong>Google Search Console API</strong></td><td>Позиции, клики, CTR по ключам</td><td>Service account + googleapiclient, опционально</td></tr>
+            <tr><td><strong>Perplexity</strong></td><td>Цитирует ли AI статью на целевой запрос</td><td>WebFetch / WebSearch по запросу</td></tr>
+            <tr><td><strong>Яндекс Нейро</strong></td><td>AI-блок, наличие ссылки на статью</td><td>WebSearch или WebFetch</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>По результатам tracker генерирует action items в <code>pipeline.md</code> секция «Tracking log»:</p>
+      <ul>
+        <li>Позиция 4–10 → добавить H2-раздел или расширить FAQ</li>
+        <li>Позиция 11–20 → добавить внутренних ссылок</li>
+        <li>Не в топ-100 → проверить индексацию</li>
+        <li>Perplexity не цитирует → усилить definition-блок с прямым ответом</li>
+        <li>Яндекс AI не цитирует → переработать первый абзац</li>
+      </ul>
+
+      <h3 id="optimizer">Page optimizer: хирургическая доработка</h3>
+      <p>/page-optimizer читает action items и точечно вносит правки — не переписывает статью. Принцип: минимальное изменение с максимальным эффектом на позицию. Статьи в зоне 4–10 имеют наибольший ROI доработки — они уже ранжируются, нужен небольшой сигнал для перехода в топ-3.</p>
+
+      <div class="callout gold">
+        <strong>llms.txt:</strong> после каждой публикации /publisher обновляет <code>llms.txt</code> — файл в формате llmstxt.org, который LLM-краулеры используют при индексации. Новые статьи добавляются в секцию «## Блог» в начало (свежий контент важнее для LLM-индексации). Деплоится на сервер через SSH.
+      </div>
+
+    </article>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="wrap">
+  <div class="cta-block">
+    <h2>Этот пайплайн работает в AgentIQ</h2>
+    <p>Те же 10 агентов, quality-gates и knowledge-base строят контент для маркетплейсов и SEO в AgentIQ.</p>
+    <a href="https://agentiq.ru" class="btn-blue">Узнать про AgentIQ →</a>
+    <a href="geo-aeo-protocol.html" class="btn-ghost">Протокол GEO/AEO →</a>
+  </div>
+</div>
+
+<footer>
+  AgentIQ · AI Content Pipeline · 2026 · <a href="https://agentiq.ru" style="color:inherit">agentiq.ru</a>
+</footer>
+
+</body>
+</html>

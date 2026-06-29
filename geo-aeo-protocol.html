@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEO + AEO Протокол 2025–2026 — AgentIQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #0b0c10;
+  --s1:      #111318;
+  --s2:      #181b22;
+  --s3:      #1e2128;
+  --border:  rgba(255,255,255,.07);
+  --border2: rgba(255,255,255,.12);
+  --text:    #e8eaf0;
+  --text2:   #8b90a0;
+  --text3:   #565c6e;
+  --blue:    #3b82f6;
+  --blue-bg: rgba(59,130,246,.1);
+  --green:   #22c55e;
+  --green-bg:rgba(34,197,94,.1);
+  --gold:    #f59e0b;
+  --gold-bg: rgba(245,158,11,.1);
+  --red:     #ef4444;
+  --red-bg:  rgba(239,68,68,.1);
+  --r:       12px;
+  --rs:      8px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:15px;-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+strong{font-weight:600}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(11,12,16,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-family:'Manrope',sans-serif;font-weight:800;font-size:16px;color:var(--text);letter-spacing:-.3px}
+.logo em{color:var(--blue);font-style:normal}
+.nav-links{display:flex;align-items:center;gap:20px}
+.nav-link{font-size:13px;color:var(--text2);font-weight:500}
+.nav-link:hover{color:var(--text);text-decoration:none}
+.nav-cta{background:var(--blue);color:#fff;padding:7px 18px;border-radius:20px;font-size:13px;font-weight:600}
+.nav-cta:hover{background:#2563eb;text-decoration:none}
+
+/* LAYOUT */
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* HERO */
+.hero{padding:72px 0 60px;border-bottom:1px solid var(--border)}
+.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:12px;color:var(--text3)}
+.breadcrumb a{color:var(--text3)}
+.breadcrumb a:hover{color:var(--text2);text-decoration:none}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--gold-bg);border:1px solid rgba(245,158,11,.2);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Manrope',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:900;line-height:1.15;letter-spacing:-.5px;margin-bottom:16px;color:#fff}
+.hero p{font-size:17px;color:var(--text2);max-width:680px;line-height:1.75;margin-bottom:28px}
+.hero-meta{display:flex;gap:24px;flex-wrap:wrap}
+.hero-meta-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text3)}
+.hero-meta-item svg{color:var(--text3)}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin:40px 0}
+@media(max-width:700px){.stats-row{grid-template-columns:repeat(2,1fr)}}
+.stat-cell{background:var(--s1);padding:20px 20px 18px;text-align:center}
+.stat-num{font-family:'Manrope',sans-serif;font-size:28px;font-weight:900;line-height:1;letter-spacing:-1px;margin-bottom:6px}
+.stat-label{font-size:11px;color:var(--text2);line-height:1.4;letter-spacing:.01em}
+.c-red{color:var(--red)}.c-blue{color:var(--blue)}.c-green{color:var(--green)}.c-gold{color:var(--gold)}
+
+/* CONTENT */
+.content-grid{display:grid;grid-template-columns:240px 1fr;gap:48px;align-items:start;padding:56px 0 80px}
+@media(max-width:820px){.content-grid{grid-template-columns:1fr}}
+
+/* SIDEBAR TOC */
+.toc{position:sticky;top:72px;background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.toc-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:12px}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.toc-list a{font-size:13px;color:var(--text2);display:block;padding:5px 8px;border-radius:6px;line-height:1.4}
+.toc-list a:hover{background:var(--s2);color:var(--text);text-decoration:none}
+.toc-list .toc-sub a{font-size:12px;padding-left:16px;color:var(--text3)}
+@media(max-width:820px){.toc{display:none}}
+
+/* ARTICLE */
+.article h2{font-family:'Manrope',sans-serif;font-size:22px;font-weight:800;color:#fff;margin:48px 0 16px;padding-top:8px;letter-spacing:-.3px}
+.article h2:first-child{margin-top:0}
+.article h3{font-family:'Manrope',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin:28px 0 10px}
+.article p{margin-bottom:16px;color:var(--text2);line-height:1.8}
+.article ul,.article ol{margin:0 0 16px 0;padding-left:20px;color:var(--text2);line-height:1.8}
+.article li{margin-bottom:6px}
+.article strong{color:var(--text);font-weight:600}
+
+/* CALLOUT */
+.callout{background:var(--s1);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:var(--rs);padding:18px 20px;margin:20px 0;font-size:14px;color:var(--text2);line-height:1.75}
+.callout.gold{border-left-color:var(--gold);background:var(--gold-bg)}
+.callout.green{border-left-color:var(--green);background:var(--green-bg)}
+.callout.red{border-left-color:var(--red);background:var(--red-bg)}
+.callout strong{color:var(--text)}
+
+/* DATA TABLE */
+.table-wrap{overflow-x:auto;margin:20px 0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border2);background:var(--s1)}
+td{padding:11px 14px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;line-height:1.55}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--text)}
+
+/* TACTIC CARDS */
+.tactics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:20px 0}
+@media(max-width:600px){.tactics-grid{grid-template-columns:1fr}}
+.tactic-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--rs);padding:18px 20px}
+.tactic-rank{font-family:'Manrope',sans-serif;font-size:24px;font-weight:900;color:var(--blue);margin-bottom:8px;line-height:1}
+.tactic-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.tactic-lift{font-size:12px;color:var(--green);font-weight:600;margin-bottom:8px}
+.tactic-desc{font-size:13px;color:var(--text2);line-height:1.6}
+
+/* SECTION LABEL */
+.section-label{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
+.section-num{width:22px;height:22px;border-radius:50%;background:var(--s2);border:1px solid var(--border2);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text3)}
+
+/* GAPS */
+.gap-list{display:flex;flex-direction:column;gap:12px;margin:20px 0}
+.gap-item{display:grid;grid-template-columns:48px 1fr;gap:16px;background:var(--s1);border:1px solid var(--border);border-radius:var(--rs);padding:16px 18px;align-items:flex-start}
+.gap-letter{font-family:'Manrope',sans-serif;font-size:22px;font-weight:900;color:var(--text3);line-height:1}
+.gap-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.gap-desc{font-size:13px;color:var(--text2);line-height:1.65}
+
+/* ROADMAP */
+.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}
+@media(max-width:600px){.roadmap{grid-template-columns:1fr}}
+.roadmap-col{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.roadmap-phase{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.roadmap-time{font-family:'Manrope',sans-serif;font-size:18px;font-weight:800;color:#fff;margin-bottom:12px}
+.roadmap-items{list-style:none;display:flex;flex-direction:column;gap:8px}
+.roadmap-items li{font-size:13px;color:var(--text2);padding-left:16px;position:relative;line-height:1.5}
+.roadmap-items li::before{content:'→';position:absolute;left:0;color:var(--blue)}
+
+/* CTA */
+.cta-block{background:var(--s1);border:1px solid var(--border2);border-radius:var(--r);padding:40px;text-align:center;margin:56px 0 80px}
+.cta-block h2{font-family:'Manrope',sans-serif;font-size:24px;font-weight:800;color:#fff;margin-bottom:10px}
+.cta-block p{color:var(--text2);margin-bottom:24px;font-size:15px}
+.btn-blue{display:inline-block;background:var(--blue);color:#fff;padding:12px 28px;border-radius:24px;font-weight:700;font-size:14px}
+.btn-blue:hover{background:#2563eb;text-decoration:none}
+.btn-ghost{display:inline-block;color:var(--text2);padding:12px 20px;font-size:14px;font-weight:600}
+.btn-ghost:hover{color:var(--text);text-decoration:none}
+
+/* DIVIDER */
+hr{border:none;border-top:1px solid var(--border);margin:36px 0}
+
+/* HIGHLIGHT */
+.hl{color:var(--text);font-weight:600}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Agent<em>IQ</em></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">← AI SEO Pipeline</a>
+      <a href="index.html#pipeline" class="nav-link">Как работает</a>
+      <a href="index.html#cta" class="nav-cta">Начать</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="breadcrumb">
+      <a href="index.html">AI SEO Pipeline</a>
+      <span>›</span>
+      <span>GEO + AEO Протокол</span>
+    </div>
+    <div class="hero-badge">Исследование 2025–2026</div>
+    <h1>SEO + GEO + AEO:<br>рабочий протокол для RU-рынка</h1>
+    <p>Что реально работает в 2026 году — данные из 300 000+ ключей, Princeton GEO Paper, Ahrefs, BrightEdge и ETarget. Без воды.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Обновлено: июнь 2026
+      </div>
+      <div class="hero-meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        7 разделов · 40+ тактик
+      </div>
+      <div class="hero-meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Яндекс + Google + ChatGPT + Нейро
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="stat-num c-red">−58%</div>
+        <div class="stat-label">CTR позиции №1 после появления AI Overview</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num c-blue">0.664</div>
+        <div class="stat-label">Корреляция brand mentions с AIO-цитированием</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num c-green">23×</div>
+        <div class="stat-label">Конверсия AI-трафика vs обычная органика</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num c-gold">29%</div>
+        <div class="stat-label">Доля YouTube в AI Overview Citations</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="wrap">
+  <div class="content-grid">
+
+    <!-- SIDEBAR TOC -->
+    <aside class="toc">
+      <div class="toc-title">Разделы</div>
+      <ul class="toc-list">
+        <li><a href="#seo-2026">1. SEO 2025–2026</a></li>
+        <li class="toc-sub"><a href="#google">Google: NavBoost + HCU</a></li>
+        <li class="toc-sub"><a href="#yandex">Яндекс: ПФ и Нейро</a></li>
+        <li class="toc-sub"><a href="#compare">Google vs Яндекс</a></li>
+        <li><a href="#geo">2. GEO: попасть в AI-ответы</a></li>
+        <li class="toc-sub"><a href="#princeton">Princeton GEO Paper</a></li>
+        <li class="toc-sub"><a href="#aio">Google AIO + YouTube</a></li>
+        <li class="toc-sub"><a href="#neuro">Яндекс Нейро</a></li>
+        <li class="toc-sub"><a href="#llm-compare">ChatGPT vs Perplexity vs Claude</a></li>
+        <li><a href="#aeo">3. AEO: Featured Snippets</a></li>
+        <li><a href="#entity">4. Entity SEO</a></li>
+        <li><a href="#keywords">5. Keyword Research</a></li>
+        <li><a href="#gaps">6. Пробелы пайплайна</a></li>
+        <li><a href="#tactics">7. 12 неочевидных тактик</a></li>
+        <li><a href="#model">Операционная модель</a></li>
+      </ul>
+    </aside>
+
+    <!-- ARTICLE -->
+    <article class="article">
+
+      <!-- SECTION 1 -->
+      <div class="section-label"><span class="section-num">1</span> Классический SEO</div>
+      <h2 id="seo-2026">SEO 2025–2026: что изменилось</h2>
+
+      <div class="callout">
+        <strong>Главный сдвиг:</strong> рейтинги и клики расцепились. AI Overviews покрывают 49,9% поисков Google, снижают CTR позиции №1 на 58%. Яндекс Нейро забирает до 30% трафика информационных сайтов. При этом конверсия AI-трафика в 6–23 раза выше органики.
+      </div>
+
+      <h3 id="google">Google: NavBoost, HCU и утечка API</h3>
+      <p>Утечка 14 000 атрибутов Content Warehouse API и показания Pandu Nayak под присягой на DOJ-процессе подтвердили то, что Google годами отрицал:</p>
+      <ul>
+        <li><strong>NavBoost</strong> — главная система re-ranking по клик-поведению. Внутренние документы характеризовали её как «более мощную, чем всё остальное ранжирование вместе взятое». Поля: <code>goodClicks</code>, <code>badClicks</code>, <code>lastLongestClicks</code> (сильнейший сигнал — последний клик сессии с долгим dwell), окно агрегации 13 месяцев.</li>
+        <li><strong>siteAuthority</strong> — site-wide score, существование которого Google публично отрицал.</li>
+        <li><strong>siteFocusScore + siteRadius</strong> — Google векторизует страницы относительно «ядра темы» сайта. Это прямое подтверждение topical authority как реального фактора.</li>
+      </ul>
+
+      <p><strong>Helpful Content System</strong> интегрирован в core ranking с марта 2024 и перестал быть отдельным апдейтом. Декабрьский 2025 Core Update: глубина контента победила длину — 800 слов с точным ответом на интент обгоняют 3 000-словные гайды.</p>
+
+      <p><strong>E-E-A-T:</strong> Trust — самый важный компонент. В декабре 2025 применение расширилось за пределы YMYL. Affiliate-обзоры без hands-on testing получили просадки. SaaS-блоги, ставящие себя #1 без disclosure — «silent killer».</p>
+
+      <div class="callout gold">
+        <strong>Core Web Vitals (декабрь 2025):</strong> LCP ≤ 2,5с · INP ≤ 200мс · CLS ≤ 0,1. Оценка по 75-му перцентилю CrUX. Только 48% мобильных сайтов проходят все три.
+      </div>
+
+      <h3 id="yandex">Яндекс: поведенческие сигналы и Нейро</h3>
+      <p>Яндекс принципиально отличается: <strong>поведенческие факторы (ПФ) — приоритет</strong>, ссылочный вес снижен на ~30% после апдейта 2024. Данные берутся из Метрики, Яндекс.Браузера, кликов в SERP. Для влияния нужно 1–2 недели накопления статистики.</p>
+
+      <div class="callout red">
+        <strong>Осторожно:</strong> Накрутка ПФ детектируется через DeviceHash и GeoSkew — санкции до потери 90% трафика и обнуления ИКС на ~год.
+      </div>
+
+      <p>Эволюция нейросетей: Палех (2016) → Королёв → YATI → Y1 → Нейро (октябрь 2024) → <strong>Поиск с рассуждениями</strong> на технологиях Алисы (май 2025). Архитектура: 16 реплик → BERT-ранжирование → ~5 источников → генеративная модель. <strong>Параметрическое знание не используется — только переданные источники.</strong></p>
+
+      <p>Управление через <code>User-agent: YandexAdditional</code> в robots.txt отключает использование контента в Нейро и Быстрых ответах (применяется 2–14 дней).</p>
+
+      <h3 id="compare">Google vs Яндекс: принципиальные различия</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Фактор</th><th>Google</th><th>Яндекс</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Поведенческие</strong></td><td>NavBoost косвенно через клики</td><td>Прямой и сильный фактор; данные из Метрики</td></tr>
+            <tr><td><strong>Ссылки</strong></td><td>Сильный фактор (манипулятивные devalued)</td><td>Снижено значение; легко получить Минусинск</td></tr>
+            <tr><td><strong>Региональность</strong></td><td>Слабая</td><td>Критична</td></tr>
+            <tr><td><strong>Контент</strong></td><td>Глубина + E-E-A-T обязательны</td><td>Может ранжировать короткий текст при хороших ПФ</td></tr>
+            <tr><td><strong>Скорость индексации</strong></td><td>Часы–дни</td><td>Недели; периодические апдейты базы</td></tr>
+            <tr><td><strong>Антиспам</strong></td><td>Менее строгий</td><td>Баден-Баден за плотность ключей &gt;5%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 2 -->
+      <div class="section-label"><span class="section-num">2</span> GEO</div>
+      <h2 id="geo">GEO: как попасть в AI-ответы</h2>
+
+      <h3 id="princeton">Princeton GEO Paper — что реально работает</h3>
+      <p>Исследование Aggarwal et al. (KDD 2024) — 10 000 запросов в Perplexity.ai, измеримые приросты видимости в LLM-ответах:</p>
+
+      <div class="tactics-grid">
+        <div class="tactic-card">
+          <div class="tactic-rank">1</div>
+          <div class="tactic-name">Quotation Addition</div>
+          <div class="tactic-lift">+42.6% к видимости</div>
+          <div class="tactic-desc">Прямые цитаты экспертов и пользователей с атрибуцией</div>
+        </div>
+        <div class="tactic-card">
+          <div class="tactic-rank">2</div>
+          <div class="tactic-name">Statistics Addition</div>
+          <div class="tactic-lift">+32.8% к видимости</div>
+          <div class="tactic-desc">Замена общих утверждений конкретными цифрами и процентами</div>
+        </div>
+        <div class="tactic-card">
+          <div class="tactic-rank">3</div>
+          <div class="tactic-name">Fluency Optimization</div>
+          <div class="tactic-lift">+28.7% к видимости</div>
+          <div class="tactic-desc">Переписывание для краткости и читабельности</div>
+        </div>
+        <div class="tactic-card">
+          <div class="tactic-rank">4</div>
+          <div class="tactic-name">Cite Sources</div>
+          <div class="tactic-lift">+27.7% к видимости</div>
+          <div class="tactic-desc">Inline-ссылки на первоисточники с атрибуцией</div>
+        </div>
+      </div>
+
+      <div class="callout gold">
+        <strong>Лучшая пара по heatmap — Fluency + Statistics</strong>, не Quote + Cite, как многие предполагают. Keyword Stuffing дал <strong>отрицательный результат</strong>. «Underdog effect»: низкоранжированные сайты получают непропорционально больший прирост — Cite Sources даёт +115% видимости для сайта на 5-й позиции, почти ноль для топ-1.
+      </div>
+
+      <h3 id="aio">Google AI Overviews + YouTube</h3>
+      <p>Кто реально цитируется в AIO (данные Ahrefs, BrightEdge, SeoClarity — 300 000–863 000 keywords, 4 млн URL):</p>
+      <ul>
+        <li><strong>YouTube — 29–30% всех AI Overview citations</strong>, в 200 раз чаще любой другой видеоплатформы; Vimeo 0,1%, TikTok 0,1%</li>
+        <li>Только 38% AIO-цитат идут из топ-10 органики (март 2026; было 76% в июле 2025) — Gemini 3 расширил пул через fan-out на ~32%</li>
+        <li>Длина контента <strong>почти не коррелирует</strong> с цитированием (r=0,04); 53% AIO-цитат — страницы &lt;1000 слов</li>
+        <li>Brand mentions коррелируют с AIO-цитированием <strong>0,664</strong>; backlinks — 0,218. Топ-25% брендов получают в 10× больше AIO-цитат</li>
+        <li>70% цитируемых страниц меняются за 2–3 месяца — рынок волатилен</li>
+        <li><strong>44% AIO-цитат — из первой трети контента</strong> страницы (Growth Memo, февраль 2026). Структура answer-first критична</li>
+      </ul>
+
+      <h3 id="neuro">Яндекс Нейро: топ-5 органики как фильтр</h3>
+      <p>Конкуренция жёстче, чем в Google AIO: ~5 источников против 13. <strong>63% цитирований идут из топ-5 органики</strong>, в топ-3 — шанс ~73% (Devorra, февраль 2026).</p>
+      <div class="callout">
+        Андрей Сюткин (ML-лид Нейро): «Чтобы чаще появляться в источниках Нейро, сайты должны высоко ранжироваться в поиске». Платно попасть в Нейро нельзя. Срок после доработки — 3–8 недель в коммерческих нишах.
+      </div>
+
+      <h3 id="llm-compare">Что цитируют разные LLM</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Платформа</th><th>Топ-источники</th><th>Особенность</th></tr></thead>
+          <tbody>
+            <tr><td><strong>ChatGPT Search</strong></td><td>Reddit, Wikipedia (7,8%), Forbes, Business Insider</td><td>~80% всего AI referral traffic; после сентября 2025 вырос вес Forbes, PRNewswire</td></tr>
+            <tr><td><strong>Perplexity</strong></td><td>Reddit (46,7%), LinkedIn, YouTube, G2</td><td>Wikipedia почти не цитируется; 6-этапный RAG с 3-слойным ML reranking</td></tr>
+            <tr><td><strong>Google AI Mode</strong></td><td>Wikipedia, YouTube, Reddit, Quora</td><td>После Gemini 3 — концентрация на структурированных авторитетных источниках</td></tr>
+            <tr><td><strong>Claude</strong></td><td>NYT, The Atlantic, The Economist</td><td>Журналистика; 36% контента свежее 12 мес.; растёт 12,8× YoY</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout green">
+        <strong>Конверсия AI-трафика</strong> (Seer Interactive): ChatGPT — 15,9%, Perplexity — 10,5%, Claude — 5%, Gemini — 3%. Общая AI-конверсия в 6–23 раза выше Google-органики (Ahrefs, Webflow).
+      </div>
+
+      <hr>
+
+      <!-- SECTION 3 -->
+      <div class="section-label"><span class="section-num">3</span> AEO</div>
+      <h2 id="aeo">AEO: Featured Snippets и голосовой поиск</h2>
+      <p>В 2025 Google разрешил <strong>сосуществование AI Overviews и Featured Snippets</strong> — оптимизация под FS даёт двойную выгоду. &gt;90% страниц-снипетов уже в топ-10 органики.</p>
+
+      <ul>
+        <li>H2/H3 как вопросы из PAA → абзац 40–60 слов с прямым ответом</li>
+        <li>Lists: 5–8 пунктов (Google усекает &gt;8); H3 как пункты списка</li>
+        <li>Tables: настоящие <code>&lt;table&gt;</code>, не div-flexbox — extractable как структурированные данные</li>
+        <li>FAQPage schema + inline citations: <strong>+40% к вероятности отбора в AI-ответы</strong> (Authoritas 2025); +3× к цитированию в ChatGPT</li>
+        <li>SpeakableSpecification schema для блоков, читаемых ассистентами; 65% голосовых поисков начинаются с вопросительных слов</li>
+      </ul>
+
+      <div class="callout gold">
+        <strong>44% AIO-цитат — из первой трети контента.</strong> Структура answer-first — главный принцип и для AEO, и для GEO одновременно.
+      </div>
+
+      <hr>
+
+      <!-- SECTION 4 -->
+      <div class="section-label"><span class="section-num">4</span> Entity SEO</div>
+      <h2 id="entity">Entity-based SEO и Topical Authority</h2>
+
+      <h3>Knowledge Graph: как попасть</h3>
+      <p>Июнь 2025 — Google провёл «Clarity Cleanup»: удалил ~3 млрд сущностей. Порог качества ужесточён. Реалистичные способы для нового бренда:</p>
+      <ul>
+        <li><strong>Wikidata Q-ID</strong> — создать структурированную запись со ссылками на источники самостоятельно</li>
+        <li>Organization schema с полным <code>sameAs</code> (LinkedIn, Crunchbase, X, GitHub, YouTube, отраслевые директории)</li>
+        <li>Консистентный NAP, упоминания на авторитетных сайтах (без ссылок тоже считаются)</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Неочевидный инсайт:</strong> <code>@id</code> property с консистентными URL по всему сайту критичнее самих <code>sameAs</code> — он связывает все сущности в единый граф. На каждой странице — <code>mainEntityOfPage</code> указывающий на канонический <code>@id</code>.
+      </div>
+
+      <h3>Topical Authority по Koray Tuğberk Gübür</h3>
+      <p>Формула: <strong>Topical Authority = Topical Coverage + Historical Data + Cost of Retrieval</strong>. Ключевая концепция — Semantic Content Network: связанные через NLP/entity внутренние ссылки, а не просто topic clusters.</p>
+
+      <h3>Information Gain как ранжирующий сигнал</h3>
+      <p>Патент Google (US20200349181A1, granted июнь 2024): per-query оценка — насколько новую информацию страница даёт vs уже просмотренных. По интерпретации March 2026 core update — <strong>Information Gain стал доминирующим сигналом</strong>. AI-парафраз получает низкий score. Оригинальные данные/исследования/опросы дают +15–25%.</p>
+
+      <hr>
+
+      <!-- SECTION 5 -->
+      <div class="section-label"><span class="section-num">5</span> Keywords</div>
+      <h2 id="keywords">Keyword Research: готовый протокол</h2>
+      <p>Keyword research в 2025–2026 = <strong>keyword + prompt + entity research</strong>. Средняя длина запроса в LLM — 7 слов. Brand mentions важнее ссылок для AI-видимости.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Шаг</th><th>Задача</th><th>Инструменты</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1. Seed keywords</strong></td><td>Brainstorm + GSC/Метрика запросы с показами но низкой позицией</td><td>GSC, Метрика, конкуренты keys.so/Ahrefs</td></tr>
+            <tr><td><strong>2. Расширение</strong></td><td>Полное семантическое поле, вопросная семантика</td><td>Wordstat, Букварикс, Keys.so, AlsoAsked</td></tr>
+            <tr><td><strong>3. Частотность</strong></td><td>Точная фразовая "!W" — истинная частотность</td><td>Key Collector, Rush Analytics, Topvisor</td></tr>
+            <tr><td><strong>4. SERP-анализ</strong></td><td>Тип контента топа, SERP-features, домены-доминанты</td><td>Инкогнито, регион «Россия»</td></tr>
+            <tr><td><strong>5. Intent</strong></td><td>По SERP-сигналам, не маркерам. Flag multi-intent и generative intent</td><td>Ручной анализ SERP</td></tr>
+            <tr><td><strong>6. Кластеризация</strong></td><td>По топу SERP + embeddings + гибрид. Точность 4 для RU</td><td>Rush Analytics, Topvisor, KeyAssort</td></tr>
+            <tr><td><strong>7. Приоритизация</strong></td><td>KOB Score = (Volume × Relevancy) / KD + zero-click risk</td><td>Ahrefs KD, ручная оценка</td></tr>
+            <tr><td><strong>8. Маппинг</strong></td><td>Topic Cluster: Pillar → Spoke → Single review → VS</td><td>Структура сайта</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout gold">
+        <strong>Новый класс intent — Generative intent:</strong> пользователь хочет готовое решение, не ссылки. Задача — попасть в цитаты AI, не получить клик. Измерять impressions и brand search lift, не только позиции.
+      </div>
+
+      <hr>
+
+      <!-- SECTION 6 -->
+      <div class="section-label"><span class="section-num">6</span> Пробелы пайплайна</div>
+      <h2 id="gaps">Конкретные пробелы и предложения по улучшению</h2>
+      <p>Анализ пайплайна из 10 агентов AgentIQ относительно актуальных практик 2025–2026 года.</p>
+
+      <div class="gap-list">
+        <div class="gap-item">
+          <div class="gap-letter">A</div>
+          <div>
+            <div class="gap-title">Entity-SEO и Knowledge Graph — отсутствует системно</div>
+            <div class="gap-desc">Нет этапа, который строит entity-граф. Добавить: @id consistency, mainEntityOfPage, полные sameAs, Wikidata-запись. /researcher должен строить topical map через knowsAbout-список, не только конкретный запрос.</div>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="gap-letter">B</div>
+          <div>
+            <div class="gap-title">YouTube как канал — отсутствует полностью</div>
+            <div class="gap-desc">YouTube даёт 29–30% AIO Citations — самый недооценённый AI-канал. Нужен sub-pipeline /video-producer: скрипт из статьи → рендер → timestamped chapters → 500+ слов описания → VideoObject schema с транскриптом.</div>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="gap-letter">C</div>
+          <div>
+            <div class="gap-title">Brand mentions monitoring — упущено как KPI #1</div>
+            <div class="gap-desc">Корреляция 0,664 с AIO — это главный GEO-фактор, но в пайплайне измеряется только косвенно. /tracker должен считать unlinked brand mentions через Ahrefs Brand Radar, связать с outreach-задачами.</div>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="gap-letter">D</div>
+          <div>
+            <div class="gap-title">Prompt research не отделён от keyword research</div>
+            <div class="gap-desc">Добавить артефакт prompts.md: 15–25 словные prompts × tag (compare/recommend/how-to) × источник × статус цитирования. Собирать через прямой опрос ChatGPT/Perplexity + Brand Radar + GSC regex.</div>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="gap-letter">E</div>
+          <div>
+            <div class="gap-title">Schema-стек неполный</div>
+            <div class="gap-desc">Есть Article + FAQPage. Критично добавить: Review + AggregateRating, SoftwareApplication или Product, ItemList для «Best of», BreadcrumbList, Person с worksFor, Organization на homepage. Кейс Previsible: SoftwareApplication schema → +150% AI traffic за 90 дней.</div>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="gap-letter">F</div>
+          <div>
+            <div class="gap-title">Information Gain не учитывается как метрика</div>
+            <div class="gap-desc">Добавить в /quality-gate: проверка на наличие хотя бы одного из — собственный benchmark, оригинальный опрос, hands-on screenshots, уникальные численные наблюдения. Ежеквартальные отчёты тестирования = линкбейт-актив.</div>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="gap-letter">K</div>
+          <div>
+            <div class="gap-title">Comparison/VS-страницы как формат — отсутствуют</div>
+            <div class="gap-desc">B2B SaaS comparison pages дают 7,5%+ conversion vs 2–5% baseline; 51% B2B buyers начинают research в AI chatbot. Нужен отдельный шаблон с честной таблицей, включая сильные стороны конкурента.</div>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="gap-letter">N</div>
+          <div>
+            <div class="gap-title">Свежесть как процесс не выстроена</div>
+            <div class="gap-desc">Декабрь 2025 Core Update наказывает косметические обновления без изменения контента. AI-цитируемый контент на 25,7% свежее органически ранжированного. /page-optimizer должен работать по календарю свежести — каждые 60–90 дней с реальными изменениями.</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Приоритезированный roadmap</h3>
+      <div class="roadmap">
+        <div class="roadmap-col">
+          <div class="roadmap-phase c-red">Срочно</div>
+          <div class="roadmap-time">1–2 недели</div>
+          <ul class="roadmap-items">
+            <li>Полные sameAs-ссылки (Organization schema)</li>
+            <li>Brand mentions tracking в /tracker</li>
+            <li>Расширение schema: Review + SoftwareApplication + ItemList</li>
+            <li>Information Gain check в /quality-gate</li>
+            <li>Self-ranking disclosure guard</li>
+          </ul>
+        </div>
+        <div class="roadmap-col">
+          <div class="roadmap-phase c-gold">Важно</div>
+          <div class="roadmap-time">1–3 месяца</div>
+          <ul class="roadmap-items">
+            <li>YouTube sub-pipeline /video-producer</li>
+            <li>Артефакт prompts.md в /researcher</li>
+            <li>Шаблон VS/comparison страниц</li>
+            <li>Календарь свежести в /page-optimizer</li>
+            <li>Entity-based anchor texts</li>
+          </ul>
+        </div>
+        <div class="roadmap-col">
+          <div class="roadmap-phase c-blue">Долгосрочно</div>
+          <div class="roadmap-time">3–6 месяцев</div>
+          <ul class="roadmap-items">
+            <li>Entity-binder агент + Wikidata-запись</li>
+            <li>Ежеквартальные benchmark-отчёты</li>
+            <li>Community/Reddit-агент</li>
+            <li>Author entity tracking</li>
+            <li>Share of Voice LLM: 30–50 prompts × 4 платформы</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 7 -->
+      <div class="section-label"><span class="section-num">7</span> Неочевидные тактики</div>
+      <h2 id="tactics">12 неочевидных тактик — что обычно упускают</h2>
+
+      <ul>
+        <li><strong>Brand mentions &gt; backlinks для GEO.</strong> Ahrefs (75k брендов): unlinked mentions мало влияют на классическое SEO, но главный фактор для AIO-цитирования.</li>
+        <li><strong>YouTube — самый недооценённый AI-канал.</strong> Long-form 10–20 мин = 94% AI citations vs 5,7% у Shorts. Views не коррелируют с citations — структура коррелирует.</li>
+        <li><strong>Reddit-volatility — фича, не баг.</strong> Январь 2025 — падение Reddit на 350 SISTRIX points за день. Стратегия работает, но Reddit нестабилен — диверсифицировать.</li>
+        <li><strong>Information Gain как доминирующий signal с 2026.</strong> Original benchmarks + first-hand experience выигрывают; AI-парафраз проигрывает.</li>
+        <li><strong>Self-ranking penalty.</strong> SaaS-блоги с позиционированием себя #1 без disclosure — «silent killer» декабря 2025.</li>
+        <li><strong>Entity-level expertise.</strong> Agent Rank: Google знает кто опубликовал, что публиковали, где цитируют. Единый Person @id через все публикации.</li>
+        <li><strong>Comparison pages = highest-ROI формат.</strong> 7,5%+ conversion vs 2–5% baseline. Backstage SEO: 25 comparison pages → 172% ROI за 36 мес.</li>
+        <li><strong>Fluency + Statistics — лучшая пара.</strong> Не Quote + Cite, как большинство предполагает. Короткие чёткие предложения с inline-цифрами эффективнее нагрузки цитатами.</li>
+        <li><strong>ChatGPT доминирует, но Claude растёт 12,8× YoY.</strong> ~80–84% AI referral — ChatGPT. Не зацикливаться — Gemini и Claude растут быстрее.</li>
+        <li><strong>Crawl-to-referral ratio.</strong> ClaudeBot 23 951:1 (нагрузка без отдачи), PerplexityBot ~110:1, GPTBot 1 276:1. При инфраструктурных проблемах — приоритизировать Perplexity и OpenAI.</li>
+        <li><strong>Knowledge Graph Clarity Cleanup.</strong> Июнь 2025: Google удалил 3 млрд сущностей. Рассогласованность Wikipedia/Wikidata/sameAs снижает entity confidence.</li>
+        <li><strong>llms.txt — гигиена без эффекта.</strong> John Mueller: «No AI system currently uses llms.txt». Adobe аудит на 1000 доменов — 0 обращений. 30 мин на внедрение как future-proofing, но не приоритет.</li>
+      </ul>
+
+      <hr>
+
+      <!-- FINAL -->
+      <h2 id="model">Сжатая операционная модель</h2>
+
+      <div class="callout green">
+        <strong>В 2026 году побеждает тройной канал одновременно:</strong>
+        <ol style="margin:12px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:8px">
+          <li><strong>Классический SEO в топ-5 Яндекса и топ-10 Google</strong> — без этого AI-цитирование почти невозможно</li>
+          <li><strong>GEO через структурированный контент</strong> с прямыми ответами и Information Gain (собственные данные, бенчмарки, hands-on)</li>
+          <li><strong>Brand layer через mentions</strong> на vc.ru / Habr / G2 / Reddit / YouTube</li>
+        </ol>
+      </div>
+
+      <p>Pillar + Spoke + Single review + VS-страницы — обязательная архитектура. Entity-graph через @id-consistency и Wikidata — фундамент. YouTube — самый недооценённый AI-канал. Reddit — высокорисковый, но мощный. llms.txt — гигиена без эффекта.</p>
+
+    </article>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="wrap">
+  <div class="cta-block">
+    <h2>Хотите внедрить эти принципы?</h2>
+    <p>AI SEO Pipeline — 10 агентов, которые строят контент под Google AIO и Яндекс Нейро одновременно.</p>
+    <a href="index.html#cta" class="btn-blue">Узнать про пайплайн</a>
+    <a href="index.html" class="btn-ghost">← Вернуться</a>
+  </div>
+</div>
+
+</body>
+</html>
