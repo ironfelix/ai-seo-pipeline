@@ -184,7 +184,7 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-si
   <div class="wrap">
     <div class="hero-badge">Методология · 2026</div>
     <h1>AI SEO Pipeline:<br>архитектура и принципы работы</h1>
-    <p>Как устроен пайплайн из 10 агентов, который строит контент для цитирования в ChatGPT, Perplexity и Яндекс Нейро — и одновременно ранжируется в Google и Яндексе.</p>
+    <p>Как устроен пайплайн из 11 агентов, который строит контент для цитирования в ChatGPT, Perplexity и Яндекс Нейро — и одновременно ранжируется в Google и Яндексе.</p>
     <div class="hero-meta">
       <div class="hero-meta-item">
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -192,7 +192,7 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-si
       </div>
       <div class="hero-meta-item">
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        6 разделов · 10 агентов · 17 quality-метрик
+        6 разделов · 11 агентов · 24 quality-проверки
       </div>
       <div class="hero-meta-item">
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -233,11 +233,11 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-si
         <li class="toc-sub"><a href="#shift">Расцепление рейтингов и кликов</a></li>
         <li class="toc-sub"><a href="#signals">Новые сигналы ранжирования</a></li>
         <li><a href="#pipeline">2. Архитектура пайплайна</a></li>
-        <li class="toc-sub"><a href="#agents">10 агентов</a></li>
+        <li class="toc-sub"><a href="#agents">11 агентов</a></li>
         <li class="toc-sub"><a href="#editor-fanout">Редактура: фан-аут 4+1</a></li>
         <li class="toc-sub"><a href="#state">State file: pipeline.md</a></li>
         <li><a href="#gates">3. Quality gates</a></li>
-        <li class="toc-sub"><a href="#metrics">17 метрик</a></li>
+        <li class="toc-sub"><a href="#metrics">24 проверки</a></li>
         <li class="toc-sub"><a href="#knowledge">Knowledge accumulation</a></li>
         <li><a href="#geo">4. GEO-стратегия</a></li>
         <li class="toc-sub"><a href="#princeton">Princeton GEO Paper</a></li>
@@ -287,13 +287,13 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-si
       <div class="section-label"><span class="section-num">2</span> Архитектура</div>
       <h2 id="pipeline">Архитектура пайплайна</h2>
 
-      <p>Пайплайн состоит из 10 агентов — специализированных скиллов с чёткой зоной ответственности. 6 работают полностью автономно, 3 требуют подтверждения на ключевых точках. Каждый агент читает и пишет в <code>pipeline.md</code> — единый state file статьи.</p>
+      <p>Пайплайн состоит из 11 агентов — специализированных скиллов с чёткой зоной ответственности. 9 работают полностью автономно, 2 требуют подтверждения на ключевых точках. Каждый агент читает и пишет в <code>pipeline.md</code> — единый state file статьи. Скиллы проектно-независимые: вся специфика клиента (голос, методология, доступы, запрещённые темы) живёт в конфиге проекта, а не в коде агентов.</p>
 
       <div class="callout">
-        <strong>Принцип:</strong> агенты не советуют — они блокируют или пропускают. Quality-gate не «рекомендует исправить тире» — он возвращает статью до устранения нарушения. Publisher не публикует без слова «публикуем» в чате.
+        <strong>Принцип:</strong> агенты не советуют — они блокируют или пропускают. Quality-gate не «рекомендует исправить тире» — он возвращает статью до устранения нарушения. Methodology-gate блокирует статью, искажающую продукт клиента. Publisher не публикует без слова «публикуем» в чате.
       </div>
 
-      <h3 id="agents">10 агентов</h3>
+      <h3 id="agents">11 агентов</h3>
 
       <div class="agent-list">
         <div class="agent-card">
@@ -312,12 +312,22 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-si
             <div class="agent-cmd">/writer <span class="agent-tag auto">авто</span></div>
             <div class="agent-title">Черновик с answer-first структурой</div>
             <div class="agent-desc">Первый абзац — прямой ответ на запрос без вводного «воды». H2 — каждый как самостоятельный поисковый запрос. FAQ с вопросной семантикой из Яндекс Wordstat. Ритм: короткие предложения после длинных блоков. Голос бренда, не ChatGPT-style.</div>
-            <div class="agent-out">→ articles/{slug}/draft.html + pipeline.md шаг 4</div>
+            <div class="agent-out">→ articles/{slug}/draft.md + pipeline.md шаг 4</div>
           </div>
         </div>
 
         <div class="agent-card">
           <div class="agent-num">03</div>
+          <div>
+            <div class="agent-cmd">/methodology-gate <span class="agent-tag auto">авто · гейт</span></div>
+            <div class="agent-title">Методологический гейт</div>
+            <div class="agent-desc">Придирчивый проверяющий, который сверяет черновик с реальной методологией и продуктом клиента: воронка, этапы проекта, роли, метрики, платность услуг, границы «что мы делаем и не делаем». БЛОКИРУЕТ при искажениях — автоматизированная замена нишевого эксперта-ревьюера. Запускается после /writer и повторно после /editor.</div>
+            <div class="agent-out">→ pipeline.md шаги 4b/5b: PASS / BLOCK + список нарушений</div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-num">04</div>
           <div>
             <div class="agent-cmd">/editor <span class="agent-tag auto">авто · 4+1</span></div>
             <div class="agent-title">Редактура: фан-аут 4+1 ревьюера</div>
@@ -327,42 +337,32 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-si
         </div>
 
         <div class="agent-card">
-          <div class="agent-num">04</div>
+          <div class="agent-num">05</div>
           <div>
             <div class="agent-cmd">/fact-checker <span class="agent-tag auto">авто</span></div>
             <div class="agent-title">Верификация фактов</div>
-            <div class="agent-desc">Извлекает все верифицируемые утверждения. Маркирует каждое как T1 (оригинальный отчёт), T2 (крупное СМИ со ссылкой), T3 (неверифицирован) или FAIL (недостаточно доказательств). T3 — только размытые формулировки, без цифр. Пополняет knowledge-base.md проверенными фактами.</div>
-            <div class="agent-out">→ _fact-check.md + knowledge-base.md обновлён</div>
-          </div>
-        </div>
-
-        <div class="agent-card">
-          <div class="agent-num">05</div>
-          <div>
-            <div class="agent-cmd">/quality-gate <span class="agent-tag auto">авто</span></div>
-            <div class="agent-title">17 метрик — PASS/FAIL</div>
-            <div class="agent-desc">Автоматическая проверка перед публикацией. FAIL по любой метрике блокирует статью. Метрики: структурные (H1+TOC+FAQ), языковые (тире, стоп-слова, AI-паттерны), SEO (≥1500 слов, 3–7 внутренних ссылок, Schema), E-E-A-T (кейс, источники, автор). Не рекомендация — ворота.</div>
-            <div class="agent-out">→ _quality-gate.md: PASS или список FAIL с блокировкой</div>
+            <div class="agent-desc">Извлекает все верифицируемые утверждения. Маркирует каждое как T1 (оригинальный отчёт), T2 (крупное СМИ со ссылкой), T3 (неверифицирован) или FAIL (противоречит источникам — удалить). T3 — только размытые формулировки, без цифр. Кейсы клиента сверяет с публичным реестром кейсов — невервифицированный кейс не проходит. Пополняет knowledge-base.md проверенными фактами.</div>
+            <div class="agent-out">→ pipeline.md секция Fact-check + knowledge-base.md обновлён</div>
           </div>
         </div>
 
         <div class="agent-card">
           <div class="agent-num">06</div>
           <div>
-            <div class="agent-cmd">/seo-optimizer <span class="agent-tag auto">авто</span></div>
-            <div class="agent-title">SEO-упаковка</div>
-            <div class="agent-desc">Генерирует H1 × 3 варианта, SEO title (50–60 симв.), description (120–155 симв.). Проверяет H2: каждый должен быть самостоятельным поисковым запросом. FAQ из Яндекс Wordstat и Google «Люди также спрашивают». Внутренние ссылки с entity-анкорами. Schema: FAQPage + SpeakableSpecification + Review/SoftwareApplication.</div>
-            <div class="agent-out">→ pipeline.md шаг 8a: H1 / title / desc / cover_tag</div>
+            <div class="agent-cmd">/quality-gate <span class="agent-tag auto">авто</span></div>
+            <div class="agent-title">24 проверки — 17 блокирующих</div>
+            <div class="agent-desc">Автоматическая проверка перед публикацией: 17 блокирующих метрик (FAIL по любой останавливает статью), 2 мягких и 5 WARN (burstiness, отглагольные, сленг аудитории, резкие мнения). Блоки: структурные (H1+TOC+FAQ), языковые (тире ≤8, стоп-слова, AI-паттерны), SEO (≥1500 слов, 2–4 внутренние ссылки, Schema), E-E-A-T (кейс, источники, автор). Не рекомендация — ворота.</div>
+            <div class="agent-out">→ pipeline.md: PASS 17/17 или список FAIL с блокировкой</div>
           </div>
         </div>
 
         <div class="agent-card">
           <div class="agent-num">07</div>
           <div>
-            <div class="agent-cmd">/publisher <span class="agent-tag semi">подтверждение</span></div>
-            <div class="agent-title">Публикация с human gate</div>
-            <div class="agent-desc">Создаёт Google Doc для финальной проверки редактором — полный текст статьи. Параллельно создаёт WP-черновик. <strong>Полная остановка</strong> — ждёт буквально слово «публикуем» в чате. После — публикация, обновление sitemap.xml, деплой llms.txt на сервер.</div>
-            <div class="agent-out">→ Google Doc + WP post (published) + llms.txt обновлён</div>
+            <div class="agent-cmd">/seo-optimizer <span class="agent-tag auto">авто</span></div>
+            <div class="agent-title">SEO-упаковка</div>
+            <div class="agent-desc">Генерирует H1 × 3 варианта, SEO title (50–60 симв.), description (120–155 симв.). Проверяет H2: каждый должен быть самостоятельным поисковым запросом. FAQ из Яндекс Wordstat и Google «Люди также спрашивают». Внутренние ссылки по правилам перелинковки клиента: 2–4 на статью, максимум 1 коммерческая, только на каноничные страницы. Schema: FAQPage + SpeakableSpecification + Review/SoftwareApplication.</div>
+            <div class="agent-out">→ pipeline.md шаг 8a: H1 / title / desc / cover_tag</div>
           </div>
         </div>
 
@@ -371,13 +371,23 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-si
           <div>
             <div class="agent-cmd">/designer <span class="agent-tag auto">авто</span></div>
             <div class="agent-title">Инфографика</div>
-            <div class="agent-desc">Определяет 2–3 места для визуализации. Два режима: если есть <code>data/design-tokens.md</code> → Pencil MCP (клиентская дизайн-система); иначе → HTML→Playwright→PNG (стиль по дефолту). Типы: funnel, steps, stats, canvas. Загружает в WP media и вставляет в контент с lightbox.</div>
-            <div class="agent-out">→ WP media + контент обновлён с инфографикой</div>
+            <div class="agent-desc">Запускается после того, как /publisher создал WP-черновик, и до финального форматирования. Определяет 2–3 места для визуализации. Два режима: если есть <code>data/design-tokens.md</code> → Pencil MCP (клиентская дизайн-система); иначе → HTML→Playwright→PNG (стиль по дефолту). Типы: funnel, карточки cards-num/cards-badge, stats. Загружает в WP media и вставляет в контент с lightbox.</div>
+            <div class="agent-out">→ WP media + черновик обновлён с инфографикой</div>
           </div>
         </div>
 
         <div class="agent-card">
           <div class="agent-num">09</div>
+          <div>
+            <div class="agent-cmd">/publisher <span class="agent-tag semi">подтверждение</span></div>
+            <div class="agent-title">Публикация с human gate</div>
+            <div class="agent-desc">Две фазы. Sync: создаёт Google Doc для финальной проверки редактором и WP-черновик — сюда /designer вставляет инфографику. Затем <strong>полная остановка</strong> — ждёт буквально слово «публикуем» в чате; перед публикацией сверяет pipeline.md: все гейты (включая methodology-gate) должны быть PASS. После — форматирование, ACF-поля, обложка, публикация, деплой llms.txt на сервер.</div>
+            <div class="agent-out">→ Google Doc + WP post (published) + llms.txt обновлён</div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-num">10</div>
           <div>
             <div class="agent-cmd">/tracker <span class="agent-tag auto">авто</span></div>
             <div class="agent-title">Мониторинг позиций и AI-цитирований</div>
@@ -387,11 +397,11 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-si
         </div>
 
         <div class="agent-card">
-          <div class="agent-num">10</div>
+          <div class="agent-num">11</div>
           <div>
             <div class="agent-cmd">/page-optimizer <span class="agent-tag semi">по запросу</span></div>
             <div class="agent-title">Доработка по данным трекера</div>
-            <div class="agent-desc">Читает action items из pipeline.md Tracking log. Дорабатывает статьи в позициях 4–10: добавляет H2-раздел под недостающий ключ, расширяет FAQ, перерабатывает первый абзац для Яндекс AI. Не переписывает — хирургически правит слабые места.</div>
+            <div class="agent-desc">Читает action items из pipeline.md. Дорабатывает статьи в позициях 4–10: добавляет H2-раздел под недостающий ключ, расширяет FAQ, перерабатывает первый абзац для Яндекс AI. Не переписывает — хирургически правит слабые места. Правки уходят в draft и публикуются только после человеческой проверки и слова «обновляем» — второй human gate пайплайна.</div>
             <div class="agent-out">→ WP контент обновлён + action items вычеркнуты</div>
           </div>
         </div>
@@ -418,7 +428,7 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-si
       </div>
 
       <h3 id="state">State file: pipeline.md</h3>
-      <p>Каждая статья имеет <code>articles/{slug}/pipeline.md</code> — единый источник правды о её состоянии. Файл создаётся /researcher и обновляется каждым агентом. Publisher проверяет его перед публикацией: если любой из шагов researcher → writer → editor → fact-checker → quality-gate → seo-optimizer в статусе ⏳ или ❌ — публикация заблокирована.</p>
+      <p>Каждая статья имеет <code>articles/{slug}/pipeline.md</code> — единый источник правды о её состоянии. Файл создаётся /researcher и обновляется каждым агентом. Publisher проверяет его перед публикацией: если любой из шагов researcher → writer → methodology-gate → editor → fact-checker → quality-gate → seo-optimizer в статусе ⏳, ❌ или BLOCK — публикация заблокирована.</p>
 
       <div class="table-wrap">
         <table>
@@ -427,10 +437,13 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-si
             <tr><td><strong>1. Brief</strong></td><td>—</td><td>✅/⏳</td><td>Нет целевого ключа → /researcher не запускается</td></tr>
             <tr><td><strong>2. Research</strong></td><td>/researcher</td><td>✅/⏳</td><td>Нет уникального угла → /writer не пишет</td></tr>
             <tr><td><strong>4. Draft</strong></td><td>/writer</td><td>✅/⏳</td><td>—</td></tr>
+            <tr><td><strong>4b. Methodology gate</strong></td><td>/methodology-gate</td><td>PASS/BLOCK</td><td>BLOCK → /editor не запускается, /publisher блокирован</td></tr>
             <tr><td><strong>5. Редактура</strong></td><td>/editor</td><td>✅/⏳</td><td>—</td></tr>
+            <tr><td><strong>5b. Re-check</strong></td><td>/methodology-gate</td><td>PASS/BLOCK</td><td>Редактура не исказила методологию</td></tr>
             <tr><td><strong>6. Fact-check</strong></td><td>/fact-checker</td><td>✅/⏳</td><td>Незакрытые [ПРОВЕРИТЬ] → /quality-gate возвращает</td></tr>
             <tr><td><strong>7. Quality gate</strong></td><td>/quality-gate</td><td>PASS/FAIL</td><td>FAIL → /publisher блокирован</td></tr>
             <tr><td><strong>8a. SEO pack</strong></td><td>/seo-optimizer</td><td>✅/⏳</td><td>—</td></tr>
+            <tr><td><strong>8b. Инфографика</strong></td><td>/designer</td><td>✅/SKIP</td><td>—</td></tr>
             <tr><td><strong>9. Публикация</strong></td><td>/publisher</td><td>✅/⏳</td><td>Нет «публикуем» → не публикует</td></tr>
           </tbody>
         </table>
@@ -440,15 +453,15 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-si
 
       <!-- SECTION 3 -->
       <div class="section-label"><span class="section-num">3</span> Quality gates</div>
-      <h2 id="gates">Quality gates: 17 метрик</h2>
+      <h2 id="gates">Quality gates: 24 проверки</h2>
 
-      <p>/quality-gate проверяет статью перед публикацией по 17 метрикам. Каждая — PASS или FAIL. При FAIL выводится список нарушений и агент возвращает статью. Никаких «подумайте над этим» — только бинарный результат.</p>
+      <p>/quality-gate проверяет статью перед публикацией по 24 проверкам: 17 блокирующих метрик, 2 мягких и 5 WARN (burstiness, отглагольные существительные, причастные цепочки, живой сленг аудитории, резкие мнения). Блокирующая метрика — PASS или FAIL: при FAIL выводится список нарушений и агент возвращает статью. Никаких «подумайте над этим» — только бинарный результат. Вторая линия обороны — /methodology-gate: он ловит не языковые, а смысловые искажения продукта и методологии клиента.</p>
 
       <h3 id="metrics">Метрики</h3>
 
       <div class="gate-grid">
         <div class="gate-item"><strong>Структурные</strong>H1 с целевым ключом + год. TOC-блок с якорями на все H2. FAQ ≥ 4 вопросов с Schema + details/summary.</div>
-        <div class="gate-item"><strong>Объём и ссылки</strong>≥ 1 500 слов. 3–7 внутренних ссылок с descriptive анкорами. ≥ 1 ссылка на релевантную услугу.</div>
+        <div class="gate-item"><strong>Объём и ссылки</strong>≥ 1 500 слов. 2–4 внутренние ссылки с descriptive анкорами, максимум 1 коммерческая. Только каноничные страницы — не черновики, не дубли.</div>
         <div class="gate-item"><strong>Тире — hard gate</strong>≤ 8 тире в статье суммарно (проза + заголовки + таблицы). ≤ 2 тире в абзаце. Считается скриптом, не на глаз.</div>
         <div class="gate-item"><strong>Стоп-слова = 0</strong>«следует отметить», «важно понимать», «давайте разберёмся», «таким образом», «данный», «является». Каждое = FAIL.</div>
         <div class="gate-item"><strong>Первый абзац</strong>Не начинается с определения термина из заголовка. Первое предложение — прямой ответ без аббревиатур. AI должен процитировать его без контекста.</div>
@@ -615,7 +628,7 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-si
 <div class="wrap">
   <div class="cta-block">
     <h2>Этот пайплайн работает в AgentIQ</h2>
-    <p>Те же 10 агентов, quality-gates и knowledge-base строят контент для маркетплейсов и SEO в AgentIQ.</p>
+    <p>Те же 11 агентов, quality-gates и knowledge-base строят контент для маркетплейсов и SEO в AgentIQ.</p>
     <a href="https://agentiq.ru" class="btn-blue">Узнать про AgentIQ →</a>
     <a href="geo-aeo-protocol.html" class="btn-ghost">Протокол GEO/AEO →</a>
   </div>
