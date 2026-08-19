@@ -237,7 +237,7 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-si
         <li class="toc-sub"><a href="#editor-fanout">Редактура: фан-аут 4+1</a></li>
         <li class="toc-sub"><a href="#state">State file: pipeline.md</a></li>
         <li><a href="#gates">3. Quality gates</a></li>
-        <li class="toc-sub"><a href="#metrics">24 проверки</a></li>
+        <li class="toc-sub"><a href="#metrics">28 проверок</a></li>
         <li class="toc-sub"><a href="#knowledge">Knowledge accumulation</a></li>
         <li><a href="#geo">4. GEO-стратегия</a></li>
         <li class="toc-sub"><a href="#princeton">Princeton GEO Paper</a></li>
@@ -350,8 +350,8 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-si
           <div class="agent-num">06</div>
           <div>
             <div class="agent-cmd">/quality-gate <span class="agent-tag auto">авто</span></div>
-            <div class="agent-title">24 проверки — 17 блокирующих</div>
-            <div class="agent-desc">Автоматическая проверка перед публикацией: 17 блокирующих метрик (FAIL по любой останавливает статью), 2 мягких и 5 WARN (burstiness, отглагольные, сленг аудитории, резкие мнения). Блоки: структурные (H1+TOC+FAQ), языковые (тире ≤8, стоп-слова, AI-паттерны), SEO (≥1500 слов, 2–4 внутренние ссылки, Schema), E-E-A-T (кейс, источники, автор). Не рекомендация — ворота.</div>
+            <div class="agent-title">28 проверок — 18 блокирующих</div>
+            <div class="agent-desc">Автоматическая проверка перед публикацией: 18 блокирующих метрик (FAIL по любой останавливает статью), 2 мягких и 8 WARN (burstiness, отглагольные, причастный стекинг, сленг аудитории, резкие мнения, сквозные повторы, FAQ↔тело, разбивки). Блоки: структурные (H1+TOC+FAQ), языковые (тире ≤8, стоп-слова, AI-паттерны), SEO (≥1500 слов, 2–4 внутренние ссылки, Schema), E-E-A-T (кейс, источники, автор), AI-видимость (AEO-лид, самодостаточность H2, Information Gain). Не рекомендация — ворота.</div>
             <div class="agent-out">→ pipeline.md: PASS 17/17 или список FAIL с блокировкой</div>
           </div>
         </div>
@@ -453,9 +453,9 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-si
 
       <!-- SECTION 3 -->
       <div class="section-label"><span class="section-num">3</span> Quality gates</div>
-      <h2 id="gates">Quality gates: 24 проверки</h2>
+      <h2 id="gates">Quality gates: 28 проверок</h2>
 
-      <p>/quality-gate проверяет статью перед публикацией по 24 проверкам: 17 блокирующих метрик, 2 мягких и 5 WARN (burstiness, отглагольные существительные, причастные цепочки, живой сленг аудитории, резкие мнения). Блокирующая метрика — PASS или FAIL: при FAIL выводится список нарушений и агент возвращает статью. Никаких «подумайте над этим» — только бинарный результат. Вторая линия обороны — /methodology-gate: он ловит не языковые, а смысловые искажения продукта и методологии клиента.</p>
+      <p>/quality-gate проверяет статью перед публикацией по 28 проверкам: 18 блокирующих метрик, 2 мягких и 8 WARN (burstiness, отглагольные существительные, причастный стекинг, живой сленг аудитории, резкие мнения, сквозные повторы, FAQ↔тело, разбивки и визуал). Блокирующая метрика — PASS или FAIL: при FAIL выводится список нарушений и агент возвращает статью. Никаких «подумайте над этим» — только бинарный результат. Вторая линия обороны — /methodology-gate: он ловит не языковые, а смысловые искажения продукта и методологии клиента.</p>
 
       <h3 id="metrics">Метрики</h3>
 
@@ -469,6 +469,10 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-si
         <div class="gate-item"><strong>Schema markup</strong>FAQPage JSON-LD. Опционально: SpeakableSpecification, Review, SoftwareApplication. Проверяется наличие в <code>&lt;script type="application/ld+json"&gt;</code>.</div>
         <div class="gate-item"><strong>Answer-first</strong>TL;DR-блок (кратко) после H1, до TOC. Оформлен как визуальный блок, не параграф. Содержит прямой ответ, не «в этой статье мы рассмотрим».</div>
         <div class="gate-item"><strong>Кейс с деталью</strong>Кейс содержит конкретную «грязную деталь» — что именно нашли, что сказал клиент, что было сломано. Только цифры без истории = FAIL.</div>
+        <div class="gate-item"><strong>Information Gain</strong>Нужно хотя бы одно из: собственный кейс с цифрами, уникальное наблюдение из практики, данные не из конкурентных статей, оригинальный бенчмарк. Пересказ чужого = FAIL, даже безупречно написанный.</div>
+        <div class="gate-item"><strong>Самодостаточность H2</strong>Каждый из первых трёх H2 закрывает свой подзапрос сам по себе — без чтения предыдущих разделов. FAIL, если 2+ из 3 не проходят.</div>
+        <div class="gate-item"><strong>Форма без функции</strong>AI-оборот блокирует не сам по себе, а когда за ним пустое следствие. «Следует отметить: 7 из 10 РОПов…» — лишний фрейм, снять и оставить содержание. «Следует отметить, что подход эффективен» — удалить абзац.</div>
+        <div class="gate-item"><strong>Сквозные повторы <span style="opacity:.6">WARN</span></strong>4-граммы и коэффициент Жаккара между предложениями из разных разделов. Одна мысль, изложенная дважды в разных H2, и FAQ, пересказывающий тело статьи, ловятся механически.</div>
       </div>
 
       <h3 id="knowledge">Knowledge accumulation: флайвил качества</h3>
