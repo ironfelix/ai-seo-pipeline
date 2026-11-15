@@ -171,515 +171,234 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-si
   <div class="nav-inner">
     <div class="logo">Agent<em>IQ</em></div>
     <div class="nav-links">
-      <a href="#pipeline" class="nav-link">Пайплайн</a>
-      <a href="#geo" class="nav-link">GEO/AEO</a>
-      <a href="#agency" class="nav-link">Автономность</a>
+      <a href="#s2" class="nav-link">Архитектура</a>
+      <a href="#s4" class="nav-link">Проверки</a>
+      <a href="#s6" class="nav-link">GEO/AEO</a>
+      <a href="#s9" class="nav-link">Серверный режим</a>
       <a href="geo-aeo-protocol.html" class="nav-link">Протокол GEO →</a>
     </div>
     <a href="https://agentiq.ru" class="nav-cta">AgentIQ ↗</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="wrap">
-    <div class="hero-badge">Методология · 2026</div>
+    <div class="hero-badge">Методология · ноябрь 2026</div>
     <h1>AI SEO Pipeline:<br>архитектура и принципы работы</h1>
-    <p>Как устроен пайплайн из 11 агентов, который строит контент для цитирования в ChatGPT, Perplexity и Яндекс Нейро — и одновременно ранжируется в Google и Яндексе.</p>
+    <p>Здесь мы объясняем, почему построили конвейер именно так: какие данные нашли, какие правила из них вывели и как конвейер работает без человека в цикле. Рыночные цифры перенесены из прежней версии страницы (июнь 2026) и названных в тексте исследований, мы их не пересчитывали. Данные о самом конвейере обновлены в ноябре 2026.</p>
     <div class="hero-meta">
-      <div class="hero-meta-item">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        Обновлено: июнь 2026
-      </div>
-      <div class="hero-meta-item">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        6 разделов · 11 агентов · 24 quality-проверки
-      </div>
-      <div class="hero-meta-item">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Google + Яндекс + ChatGPT + Нейро
-      </div>
+      <div class="hero-meta-item">Обновлено: ноябрь 2026</div>
+      <div class="hero-meta-item">10 разделов · 30 скиллов · 39 проверок quality-gate</div>
+      <div class="hero-meta-item">Google + Яндекс + ChatGPT + Нейро</div>
     </div>
-
     <div class="stats-row">
-      <div class="stat-cell">
-        <div class="stat-num c-red">−58%</div>
-        <div class="stat-label">CTR позиции №1 после AI Overview · Ahrefs 2025</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-num c-blue">0,664</div>
-        <div class="stat-label">Корреляция brand mentions с AIO-цитированием vs 0,218 у backlinks</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-num c-green">6–23×</div>
-        <div class="stat-label">Конверсия AI-трафика vs обычная органика · Ahrefs, Webflow</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-num c-gold">44%</div>
-        <div class="stat-label">AIO-цитат берутся из первой трети контента · Growth Memo</div>
-      </div>
+      <div class="stat-cell"><div class="stat-num c-red">−58%</div><div class="stat-label">Кликабельность позиции №1 после AI Overview · Ahrefs, декабрь 2025</div></div>
+      <div class="stat-cell"><div class="stat-num c-blue">0,664</div><div class="stat-label">Корреляция упоминаний бренда с цитированием в AI Overviews, у ссылок 0,218</div></div>
+      <div class="stat-cell"><div class="stat-num c-green">6–23×</div><div class="stat-label">Конверсия посетителей из ИИ-ответов: 23× по Ahrefs, 6× по Webflow</div></div>
+      <div class="stat-cell"><div class="stat-num c-gold">44%</div><div class="stat-label">Цитат AI Overviews из первой трети страницы · Growth Memo</div></div>
     </div>
   </div>
 </section>
 
-<!-- MAIN CONTENT -->
 <div class="wrap">
   <div class="content-grid">
-
-    <!-- SIDEBAR TOC -->
     <aside class="toc">
       <div class="toc-title">Содержание</div>
       <ul class="toc-list">
-        <li><a href="#context">1. Контекст: почему SEO изменился</a></li>
-        <li class="toc-sub"><a href="#shift">Расцепление рейтингов и кликов</a></li>
-        <li class="toc-sub"><a href="#signals">Новые сигналы ранжирования</a></li>
-        <li><a href="#pipeline">2. Архитектура пайплайна</a></li>
-        <li class="toc-sub"><a href="#agents">11 агентов</a></li>
-        <li class="toc-sub"><a href="#editor-fanout">Редактура: фан-аут 4+1</a></li>
-        <li class="toc-sub"><a href="#state">State file: pipeline.md</a></li>
-        <li><a href="#gates">3. Quality gates</a></li>
-        <li class="toc-sub"><a href="#metrics">28 проверок</a></li>
-        <li class="toc-sub"><a href="#knowledge">Knowledge accumulation</a></li>
-        <li><a href="#geo">4. GEO-стратегия</a></li>
-        <li class="toc-sub"><a href="#princeton">Princeton GEO Paper</a></li>
-        <li class="toc-sub"><a href="#answer-first">Answer-first структура</a></li>
-        <li class="toc-sub"><a href="#schema">Schema markup</a></li>
-        <li><a href="#yandex">5. Яндекс и Нейро</a></li>
-        <li class="toc-sub"><a href="#pf">Поведенческие факторы</a></li>
-        <li class="toc-sub"><a href="#neuro">Яндекс Нейро</a></li>
-        <li><a href="#monitoring">6. Мониторинг</a></li>
-        <li class="toc-sub"><a href="#tracker">Tracker: позиции + AI-цитаты</a></li>
-        <li class="toc-sub"><a href="#optimizer">Page optimizer</a></li>
+        <li><a href="#s1">1. Что изменилось в SEO</a></li><li><a href="#s2">2. Архитектура</a></li><li><a href="#s3">3. Редактура: пять проверяющих</a></li><li><a href="#s4">4. Проверки перед публикацией</a></li><li><a href="#s5">5. Что мы поменяли, когда сравнили наши статьи с текстами людей</a></li><li><a href="#s6">6. GEO: за что нейросети цитируют страницу</a></li><li><a href="#s7">7. Яндекс и Нейро</a></li><li><a href="#s8">8. После публикации</a></li><li><a href="#s9">9. Серверный режим</a></li><li><a href="#s10">10. История обновлений</a></li>
       </ul>
     </aside>
-
-    <!-- ARTICLE -->
     <article class="article">
-
-      <!-- SECTION 1 -->
-      <div class="section-label"><span class="section-num">1</span> Контекст</div>
-      <h2 id="context">Почему SEO изменился в 2025–2026</h2>
-
-      <div class="callout">
-        <strong>Главный сдвиг:</strong> рейтинги и клики расцепились. AI Overviews покрывают 49,9% поисков Google — CTR позиции №1 упал на 58%. Яндекс Нейро присутствует в 68% информационных запросов. При этом конверсия AI-трафика в 6–23 раза выше обычной органики. Задача изменилась: не просто ранжироваться, а быть процитированным.
-      </div>
-
-      <h3 id="shift">Расцепление рейтингов и кликов</h3>
-      <p>До 2024 года SEO-логика была линейной: выше позиция → больше кликов. AI Overviews нарушили эту связь. Исследование Ahrefs (декабрь 2025, 300 000+ ключей) показало: при наличии AIO позиция №1 теряет 58% кликов относительно SERP без AI-блока. Трафик не исчезает — он перераспределяется к тем, кого цитирует AI.</p>
-
-      <p>Одновременно выявилась ключевая корреляция: <strong>brand mentions коррелируют с AIO-цитированием на уровне 0,664</strong> — против 0,218 у backlinks. Это меняет приоритет с наращивания ссылок на построение присутствия бренда в тематических источниках.</p>
-
-      <h3 id="signals">Новые сигналы ранжирования</h3>
-      <p>Утечка 14 000 атрибутов Content Warehouse API и показания Pandu Nayak на DOJ-процессе подтвердили реальное устройство Google-ранжирования:</p>
-      <ul>
-        <li><strong>NavBoost</strong> — главная система re-ranking по клик-поведению. Поля: <code>goodClicks</code>, <code>badClicks</code>, <code>lastLongestClicks</code>. Последний клик с долгим dwell — сильнейший сигнал. Окно агрегации: 13 месяцев.</li>
-        <li><strong>siteAuthority</strong> — site-wide score, существование которого Google публично отрицал.</li>
-        <li><strong>siteFocusScore + siteRadius</strong> — Google векторизует страницы относительно «ядра темы» сайта. Это прямое подтверждение topical authority как реального фактора ранжирования.</li>
-        <li><strong>Helpful Content System</strong> интегрирован в core ranking с марта 2024. Декабрьский 2025 Core Update: 800 слов с точным ответом на интент обгоняют 3 000-словные гайды.</li>
-      </ul>
-
-      <div class="callout gold">
-        <strong>Следствие для пайплайна:</strong> контент должен закрывать весь кластер тем (query fan-out), а не оптимизироваться под один ключ. Researcher строит кластер из 3–5 суб-запросов, Writer закрывает каждый. Это повышает topical authority и увеличивает вероятность AI-цитирования.
-      </div>
-
-      <hr>
-
-      <!-- SECTION 2 -->
-      <div class="section-label"><span class="section-num">2</span> Архитектура</div>
-      <h2 id="pipeline">Архитектура пайплайна</h2>
-
-      <p>Пайплайн состоит из 11 агентов — специализированных скиллов с чёткой зоной ответственности. 9 работают полностью автономно, 2 требуют подтверждения на ключевых точках. Каждый агент читает и пишет в <code>pipeline.md</code> — единый state file статьи. Скиллы проектно-независимые: вся специфика клиента (голос, методология, доступы, запрещённые темы) живёт в конфиге проекта, а не в коде агентов.</p>
-
-      <div class="callout">
-        <strong>Принцип:</strong> агенты не советуют — они блокируют или пропускают. Quality-gate не «рекомендует исправить тире» — он возвращает статью до устранения нарушения. Methodology-gate блокирует статью, искажающую продукт клиента. Publisher не публикует без слова «публикуем» в чате.
-      </div>
-
-      <h3 id="agents">11 агентов</h3>
-
-      <div class="agent-list">
-        <div class="agent-card">
-          <div class="agent-num">01</div>
-          <div>
-            <div class="agent-cmd">/researcher <span class="agent-tag auto">авто</span></div>
-            <div class="agent-title">Разведка и построение кластера</div>
-            <div class="agent-desc">Читает топ-10 конкурентов. Строит query fan-out кластер — 3–5 суб-запросов, которые Google разбивает из основного. Проверяет источники по уровням T1/T2/T3 (T3 без конкретных цифр). Выявляет угол, которого нет в топе — без него статья не пишется.</div>
-            <div class="agent-out">→ research/*.md + pipeline.md (шаги 1–3 заполнены)</div>
-          </div>
-        </div>
-
-        <div class="agent-card">
-          <div class="agent-num">02</div>
-          <div>
-            <div class="agent-cmd">/writer <span class="agent-tag auto">авто</span></div>
-            <div class="agent-title">Черновик с answer-first структурой</div>
-            <div class="agent-desc">Первый абзац — прямой ответ на запрос без вводного «воды». H2 — каждый как самостоятельный поисковый запрос. FAQ с вопросной семантикой из Яндекс Wordstat. Ритм: короткие предложения после длинных блоков. Голос бренда, не ChatGPT-style.</div>
-            <div class="agent-out">→ articles/{slug}/draft.md + pipeline.md шаг 4</div>
-          </div>
-        </div>
-
-        <div class="agent-card">
-          <div class="agent-num">03</div>
-          <div>
-            <div class="agent-cmd">/methodology-gate <span class="agent-tag auto">авто · гейт</span></div>
-            <div class="agent-title">Методологический гейт</div>
-            <div class="agent-desc">Придирчивый проверяющий, который сверяет черновик с реальной методологией и продуктом клиента: воронка, этапы проекта, роли, метрики, платность услуг, границы «что мы делаем и не делаем». БЛОКИРУЕТ при искажениях — автоматизированная замена нишевого эксперта-ревьюера. Запускается после /writer и повторно после /editor.</div>
-            <div class="agent-out">→ pipeline.md шаги 4b/5b: PASS / BLOCK + список нарушений</div>
-          </div>
-        </div>
-
-        <div class="agent-card">
-          <div class="agent-num">04</div>
-          <div>
-            <div class="agent-cmd">/editor <span class="agent-tag auto">авто · 4+1</span></div>
-            <div class="agent-title">Редактура: фан-аут 4+1 ревьюера</div>
-            <div class="agent-desc">Не один проход, а оркестратор. Четыре ревьюера читают статью параллельно: Р1 ИИ и стиль (30+ AI-паттернов, кальки, тире ≤8 hard gate), Р2 аудитория и тон (без сужения и пустой категоричности), Р3 структура (дубли блоков, таблицы, FAQ↔тело), Р4 язык и грамматика (висящий глагол, повторы, согласование). Затем Р5 «Живой язык» — читательский проход: добавляет голос «мы», ритм и конкретный образ, чтобы текст не был «правильным, но мёртвым». Свод снимает конфликты, правки летят в Google Doc.</div>
-            <div class="agent-out">→ Google Doc обновлён (точечные replace, картинки целы) + pipeline.md шаг 5</div>
-          </div>
-        </div>
-
-        <div class="agent-card">
-          <div class="agent-num">05</div>
-          <div>
-            <div class="agent-cmd">/fact-checker <span class="agent-tag auto">авто</span></div>
-            <div class="agent-title">Верификация фактов</div>
-            <div class="agent-desc">Извлекает все верифицируемые утверждения. Маркирует каждое как T1 (оригинальный отчёт), T2 (крупное СМИ со ссылкой), T3 (неверифицирован) или FAIL (противоречит источникам — удалить). T3 — только размытые формулировки, без цифр. Кейсы клиента сверяет с публичным реестром кейсов — невервифицированный кейс не проходит. Пополняет knowledge-base.md проверенными фактами.</div>
-            <div class="agent-out">→ pipeline.md секция Fact-check + knowledge-base.md обновлён</div>
-          </div>
-        </div>
-
-        <div class="agent-card">
-          <div class="agent-num">06</div>
-          <div>
-            <div class="agent-cmd">/quality-gate <span class="agent-tag auto">авто</span></div>
-            <div class="agent-title">28 проверок — 18 блокирующих</div>
-            <div class="agent-desc">Автоматическая проверка перед публикацией: 18 блокирующих метрик (FAIL по любой останавливает статью), 2 мягких и 8 WARN (burstiness, отглагольные, причастный стекинг, сленг аудитории, резкие мнения, сквозные повторы, FAQ↔тело, разбивки). Блоки: структурные (H1+TOC+FAQ), языковые (тире ≤8, стоп-слова, AI-паттерны), SEO (≥1500 слов, 2–4 внутренние ссылки, Schema), E-E-A-T (кейс, источники, автор), AI-видимость (AEO-лид, самодостаточность H2, Information Gain). Не рекомендация — ворота.</div>
-            <div class="agent-out">→ pipeline.md: PASS 17/17 или список FAIL с блокировкой</div>
-          </div>
-        </div>
-
-        <div class="agent-card">
-          <div class="agent-num">07</div>
-          <div>
-            <div class="agent-cmd">/seo-optimizer <span class="agent-tag auto">авто</span></div>
-            <div class="agent-title">SEO-упаковка</div>
-            <div class="agent-desc">Генерирует H1 × 3 варианта, SEO title (50–60 симв.), description (120–155 симв.). Проверяет H2: каждый должен быть самостоятельным поисковым запросом. FAQ из Яндекс Wordstat и Google «Люди также спрашивают». Внутренние ссылки по правилам перелинковки клиента: 2–4 на статью, максимум 1 коммерческая, только на каноничные страницы. Schema: FAQPage + SpeakableSpecification + Review/SoftwareApplication.</div>
-            <div class="agent-out">→ pipeline.md шаг 8a: H1 / title / desc / cover_tag</div>
-          </div>
-        </div>
-
-        <div class="agent-card">
-          <div class="agent-num">08</div>
-          <div>
-            <div class="agent-cmd">/designer <span class="agent-tag auto">авто</span></div>
-            <div class="agent-title">Инфографика</div>
-            <div class="agent-desc">Запускается после того, как /publisher создал WP-черновик, и до финального форматирования. Определяет 2–3 места для визуализации. Два режима: если есть <code>data/design-tokens.md</code> → Pencil MCP (клиентская дизайн-система); иначе → HTML→Playwright→PNG (стиль по дефолту). Типы: funnel, карточки cards-num/cards-badge, stats. Загружает в WP media и вставляет в контент с lightbox.</div>
-            <div class="agent-out">→ WP media + черновик обновлён с инфографикой</div>
-          </div>
-        </div>
-
-        <div class="agent-card">
-          <div class="agent-num">09</div>
-          <div>
-            <div class="agent-cmd">/publisher <span class="agent-tag semi">подтверждение</span></div>
-            <div class="agent-title">Публикация с human gate</div>
-            <div class="agent-desc">Две фазы. Sync: создаёт Google Doc для финальной проверки редактором и WP-черновик — сюда /designer вставляет инфографику. Затем <strong>полная остановка</strong> — ждёт буквально слово «публикуем» в чате; перед публикацией сверяет pipeline.md: все гейты (включая methodology-gate) должны быть PASS. После — форматирование, ACF-поля, обложка, публикация, деплой llms.txt на сервер.</div>
-            <div class="agent-out">→ Google Doc + WP post (published) + llms.txt обновлён</div>
-          </div>
-        </div>
-
-        <div class="agent-card">
-          <div class="agent-num">10</div>
-          <div>
-            <div class="agent-cmd">/tracker <span class="agent-tag auto">авто</span></div>
-            <div class="agent-title">Мониторинг позиций и AI-цитирований</div>
-            <div class="agent-desc">Проверяется через 30 дней после публикации, затем каждые 90. Источники: Яндекс Webmaster API (реальные позиции), GSC API (Google), Perplexity (AI-цитирования), Яндекс Нейро. Фиксирует дельту позиций и генерирует action items для /page-optimizer.</div>
-            <div class="agent-out">→ pipeline.md Tracking log обновлён + action items</div>
-          </div>
-        </div>
-
-        <div class="agent-card">
-          <div class="agent-num">11</div>
-          <div>
-            <div class="agent-cmd">/page-optimizer <span class="agent-tag semi">по запросу</span></div>
-            <div class="agent-title">Доработка по данным трекера</div>
-            <div class="agent-desc">Читает action items из pipeline.md. Дорабатывает статьи в позициях 4–10: добавляет H2-раздел под недостающий ключ, расширяет FAQ, перерабатывает первый абзац для Яндекс AI. Не переписывает — хирургически правит слабые места. Правки уходят в draft и публикуются только после человеческой проверки и слова «обновляем» — второй human gate пайплайна.</div>
-            <div class="agent-out">→ WP контент обновлён + action items вычеркнуты</div>
-          </div>
-        </div>
-      </div>
-
-      <h3 id="editor-fanout">Редактура как фан-аут: 4+1 ревьюера</h3>
-      <p>Раньше /editor был монолитным проходом — и терял правила: на 60 проверок за один заход что-то всегда проскакивало (висящий глагол, повтор слова, антитеза «X, не Y»). Теперь это оркестратор, как /researcher: четыре ревьюера читают статью <strong>параллельно</strong>, каждый со своим узким блоком, затем свод снимает конфликты и применяет правки точечными заменами — структура и картинки документа не трогаются.</p>
-
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Ревьюер</th><th>Режим</th><th>Что ловит</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Р1 · ИИ и стиль</strong></td><td>вычищает</td><td>AI-конструкции, штампы, кальки, антропоморфизм, тире ≤ 8</td></tr>
-            <tr><td><strong>Р2 · Аудитория и тон</strong></td><td>выверяет</td><td>сужение аудитории, пустая категоричность, снисходительность</td></tr>
-            <tr><td><strong>Р3 · Структура</strong></td><td>выверяет</td><td>дубли блоков, таблицы с оценками, FAQ↔тело, слабый лид</td></tr>
-            <tr><td><strong>Р4 · Язык и грамматика</strong></td><td>выверяет</td><td>висящий глагол, повторы слов, согласование, канцелярит</td></tr>
-            <tr><td><strong>Р5 · Живой язык</strong></td><td>добавляет</td><td>голос «мы», ритм, конкретный образ — против «правильно, но мёртво»</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout green">
-        <strong>Зачем пятый ревьюер:</strong> Р1–Р4 только убирают плохое и проверяют корректность. Текст может пройти все четыре — и остаться гладким, но безжизненным, как методичка. Р5 запускается последним, по уже вычищенному тексту, и отвечает за человеческую фактуру: читается ли это как живой эксперт, а не как генерация. На реальных прогонах он поднимал «человечность» статьи с 7–7,5 до 9 из 10, не добавляя пафоса.
-      </div>
-
-      <h3 id="state">State file: pipeline.md</h3>
-      <p>Каждая статья имеет <code>articles/{slug}/pipeline.md</code> — единый источник правды о её состоянии. Файл создаётся /researcher и обновляется каждым агентом. Publisher проверяет его перед публикацией: если любой из шагов researcher → writer → methodology-gate → editor → fact-checker → quality-gate → seo-optimizer в статусе ⏳, ❌ или BLOCK — публикация заблокирована.</p>
-
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Шаг</th><th>Агент</th><th>Статус</th><th>Что блокирует следующий шаг</th></tr></thead>
-          <tbody>
-            <tr><td><strong>1. Brief</strong></td><td>—</td><td>✅/⏳</td><td>Нет целевого ключа → /researcher не запускается</td></tr>
-            <tr><td><strong>2. Research</strong></td><td>/researcher</td><td>✅/⏳</td><td>Нет уникального угла → /writer не пишет</td></tr>
-            <tr><td><strong>4. Draft</strong></td><td>/writer</td><td>✅/⏳</td><td>—</td></tr>
-            <tr><td><strong>4b. Methodology gate</strong></td><td>/methodology-gate</td><td>PASS/BLOCK</td><td>BLOCK → /editor не запускается, /publisher блокирован</td></tr>
-            <tr><td><strong>5. Редактура</strong></td><td>/editor</td><td>✅/⏳</td><td>—</td></tr>
-            <tr><td><strong>5b. Re-check</strong></td><td>/methodology-gate</td><td>PASS/BLOCK</td><td>Редактура не исказила методологию</td></tr>
-            <tr><td><strong>6. Fact-check</strong></td><td>/fact-checker</td><td>✅/⏳</td><td>Незакрытые [ПРОВЕРИТЬ] → /quality-gate возвращает</td></tr>
-            <tr><td><strong>7. Quality gate</strong></td><td>/quality-gate</td><td>PASS/FAIL</td><td>FAIL → /publisher блокирован</td></tr>
-            <tr><td><strong>8a. SEO pack</strong></td><td>/seo-optimizer</td><td>✅/⏳</td><td>—</td></tr>
-            <tr><td><strong>8b. Инфографика</strong></td><td>/designer</td><td>✅/SKIP</td><td>—</td></tr>
-            <tr><td><strong>9. Публикация</strong></td><td>/publisher</td><td>✅/⏳</td><td>Нет «публикуем» → не публикует</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <hr>
-
-      <!-- SECTION 3 -->
-      <div class="section-label"><span class="section-num">3</span> Quality gates</div>
-      <h2 id="gates">Quality gates: 28 проверок</h2>
-
-      <p>/quality-gate проверяет статью перед публикацией по 28 проверкам: 18 блокирующих метрик, 2 мягких и 8 WARN (burstiness, отглагольные существительные, причастный стекинг, живой сленг аудитории, резкие мнения, сквозные повторы, FAQ↔тело, разбивки и визуал). Блокирующая метрика — PASS или FAIL: при FAIL выводится список нарушений и агент возвращает статью. Никаких «подумайте над этим» — только бинарный результат. Вторая линия обороны — /methodology-gate: он ловит не языковые, а смысловые искажения продукта и методологии клиента.</p>
-
-      <h3 id="metrics">Метрики</h3>
-
-      <div class="gate-grid">
-        <div class="gate-item"><strong>Структурные</strong>H1 с целевым ключом + год. TOC-блок с якорями на все H2. FAQ ≥ 4 вопросов с Schema + details/summary.</div>
-        <div class="gate-item"><strong>Объём и ссылки</strong>≥ 1 500 слов. 2–4 внутренние ссылки с descriptive анкорами, максимум 1 коммерческая. Только каноничные страницы — не черновики, не дубли.</div>
-        <div class="gate-item"><strong>Тире — hard gate</strong>≤ 8 тире в статье суммарно (проза + заголовки + таблицы). ≤ 2 тире в абзаце. Считается скриптом, не на глаз.</div>
-        <div class="gate-item"><strong>Стоп-слова = 0</strong>«следует отметить», «важно понимать», «давайте разберёмся», «таким образом», «данный», «является». Каждое = FAIL.</div>
-        <div class="gate-item"><strong>Первый абзац</strong>Не начинается с определения термина из заголовка. Первое предложение — прямой ответ без аббревиатур. AI должен процитировать его без контекста.</div>
-        <div class="gate-item"><strong>E-E-A-T</strong>Есть верифицированный кейс (не шаблон «было/стало»). Источники T1/T2 для конкретных цифр. Нет [ПРОВЕРИТЬ] в тексте.</div>
-        <div class="gate-item"><strong>Schema markup</strong>FAQPage JSON-LD. Опционально: SpeakableSpecification, Review, SoftwareApplication. Проверяется наличие в <code>&lt;script type="application/ld+json"&gt;</code>.</div>
-        <div class="gate-item"><strong>Answer-first</strong>TL;DR-блок (кратко) после H1, до TOC. Оформлен как визуальный блок, не параграф. Содержит прямой ответ, не «в этой статье мы рассмотрим».</div>
-        <div class="gate-item"><strong>Кейс с деталью</strong>Кейс содержит конкретную «грязную деталь» — что именно нашли, что сказал клиент, что было сломано. Только цифры без истории = FAIL.</div>
-        <div class="gate-item"><strong>Information Gain</strong>Нужно хотя бы одно из: собственный кейс с цифрами, уникальное наблюдение из практики, данные не из конкурентных статей, оригинальный бенчмарк. Пересказ чужого = FAIL, даже безупречно написанный.</div>
-        <div class="gate-item"><strong>Самодостаточность H2</strong>Каждый из первых трёх H2 закрывает свой подзапрос сам по себе — без чтения предыдущих разделов. FAIL, если 2+ из 3 не проходят.</div>
-        <div class="gate-item"><strong>Форма без функции</strong>AI-оборот блокирует не сам по себе, а когда за ним пустое следствие. «Следует отметить: 7 из 10 РОПов…» — лишний фрейм, снять и оставить содержание. «Следует отметить, что подход эффективен» — удалить абзац.</div>
-        <div class="gate-item"><strong>Сквозные повторы <span style="opacity:.6">WARN</span></strong>4-граммы и коэффициент Жаккара между предложениями из разных разделов. Одна мысль, изложенная дважды в разных H2, и FAQ, пересказывающий тело статьи, ловятся механически.</div>
-      </div>
-
-      <h3 id="knowledge">Knowledge accumulation: флайвил качества</h3>
-      <p>Каждый прогон /fact-checker добавляет верифицированные факты в <code>knowledge-base.md</code> с маркировкой источника и датой. При написании следующей статьи /researcher и /writer читают knowledge-base и опираются на уже проверенные данные — вместо повторной верификации.</p>
-
-      <p>Это решает ключевую проблему масштабирования: <strong>качество верификации не деградирует при росте темпа публикаций.</strong> При батче в 19 статей каждая следующая стартует с более богатой базой, чем предыдущая.</p>
-
-      <div class="callout green">
-        <strong>Практический результат:</strong> батч из 19 статей прошёл полный цикл researcher → publisher за два дня при нулевом снижении качества fact-checking. Knowledge-base накопил 340+ верифицированных утверждений за сессию.
-      </div>
-
-      <hr>
-
-      <!-- SECTION 4 -->
-      <div class="section-label"><span class="section-num">4</span> GEO-стратегия</div>
-      <h2 id="geo">GEO-стратегия: что заставляет LLM цитировать</h2>
-
-      <p>Generative Engine Optimization — отдельная дисциплина от классического SEO. AI-системы выбирают источники по критериям, которые не полностью совпадают с ранжирующими сигналами Google. Princeton GEO Paper — крупнейшее измеренное исследование этих критериев.</p>
-
-      <h3 id="princeton">Princeton GEO Paper: данные</h3>
-      <p>10 000 запросов, Perplexity.ai, метрика PAWC (position-adjusted word count — доля слов в AI-ответе, пришедших из вашего источника). Измерено 10 тактик оптимизации:</p>
-
-      <div class="tactics-grid">
-        <div class="tactic-card">
-          <div class="tactic-rank">+42,6%</div>
-          <div class="tactic-name">Cite Sources</div>
-          <div class="tactic-lift">Наибольший прирост для слабых позиций</div>
-          <div class="tactic-desc">Ссылки на авторитетные источники в тексте. Эффект усилен для сайтов на позициях 5–10 («underdog effect»): +115% PAWC против +40% для топ-3.</div>
-        </div>
-        <div class="tactic-card">
-          <div class="tactic-rank">+32,8%</div>
-          <div class="tactic-name">Statistics</div>
-          <div class="tactic-lift">Конкретные числа вместо общих утверждений</div>
-          <div class="tactic-desc">Вместо «многие исследования показывают» — «73% респондентов согласны (Nielsen, 2025)». LLM предпочитают верифицируемые факты.</div>
-        </div>
-        <div class="tactic-card">
-          <div class="tactic-rank">+28,7%</div>
-          <div class="tactic-name">Fluency</div>
-          <div class="tactic-lift">Короткие, чёткие предложения</div>
-          <div class="tactic-desc">Убрать воду, вводные обороты, пассивный залог. Простые синтаксические конструкции. Это не упрощение — это точность формулировки.</div>
-        </div>
-        <div class="tactic-card">
-          <div class="tactic-rank">+27,7%</div>
-          <div class="tactic-name">Quotations</div>
-          <div class="tactic-lift">Прямые цитаты экспертов</div>
-          <div class="tactic-desc">Верифицированные цитаты с атрибуцией. LLM доверяют контенту с явными источниками больше, чем обобщениям от первого лица.</div>
-        </div>
-      </div>
-
-      <div class="callout red">
-        <strong>Антипаттерн:</strong> keyword stuffing дал <strong>отрицательный результат</strong> в исследовании. Высокая плотность ключевых слов снижает PAWC — AI-системы воспринимают его как сигнал низкого качества.
-      </div>
-
-      <p><strong>Лучшая пара тактик</strong> по данным исследования: Fluency + Statistics = +61,5% PAWC суммарно. Это объясняет, почему quality-gate требует конкретных чисел с источниками и блокирует «воду» в первом абзаце.</p>
-
-      <h3 id="answer-first">Answer-first структура и первая треть</h3>
-      <p>Growth Memo проанализировал 4 000 000 URL на AIO-цитирование. Вывод: <strong>44% AI-цитат берутся из первой трети контента страницы.</strong> Это означает, что первые 400–500 слов определяют большую часть шансов на цитирование — вне зависимости от общей длины статьи.</p>
-
-      <p>Пайплайн закрепляет это системно:</p>
-      <ul>
-        <li>/writer обязан писать первый абзац как прямой ответ — «если вырвать и вставить в AI-ответ, он должен работать без контекста»</li>
-        <li>/quality-gate проверяет TL;DR-блок (визуальный «Кратко» после H1) и блокирует вводные определения</li>
-        <li>/editor убирает вводные обороты из первого абзаца в первую очередь</li>
-      </ul>
-
-      <h3 id="schema">Schema markup и структурированные данные</h3>
-      <p>Authoritas (2025): наличие FAQPage schema повышает вероятность попадания в AI Overview на <strong>+40%</strong> и в 3 раза увеличивает цитирование ChatGPT. /seo-optimizer добавляет:</p>
-      <ul>
-        <li><code>FAQPage</code> — обязательная для всех статей с FAQ-секцией</li>
-        <li><code>SpeakableSpecification</code> — для Яндекс Алисы и голосового поиска</li>
-        <li><code>Review</code> / <code>SoftwareApplication</code> — для сравнительных и обзорных статей</li>
-      </ul>
-
-      <hr>
-
-      <!-- SECTION 5 -->
-      <div class="section-label"><span class="section-num">5</span> Яндекс</div>
-      <h2 id="yandex">Яндекс и Нейро: отдельная игра</h2>
-
-      <p>Яндекс занимает 74% поискового рынка РФ (май 2025). Архитектурно он принципиально отличается от Google — поведенческие сигналы приоритетны над ссылочными, а Нейро работает иначе, чем Google AIO.</p>
-
-      <h3 id="pf">Поведенческие факторы: как это работает</h3>
-      <p>Данные берутся из Яндекс.Метрики, Яндекс.Браузера и кликов в SERP. Ключевой сигнал — <strong>lastLongestClick</strong>: последний клик в сессии с максимальным dwell time. Для влияния нужно 1–2 недели накопления статистики — в отличие от Google NavBoost (окно 13 месяцев).</p>
-
-      <p>Ссылочный вес снижен на ~30% после апдейта 2024. Баден-Баден: плотность ключевых слов выше 5% — санкция. Накрутка ПФ детектируется через DeviceHash и GeoSkew: санкции до потери 90% трафика и обнуления ИКС на ~год.</p>
-
-      <p>ЭПОС — аналог Google E-E-A-T для Яндекса: Экспертность · Полезность · Оригинальность · Своевременность. /quality-gate проверяет соответствие ЭПОС так же, как E-E-A-T.</p>
-
-      <h3 id="neuro">Яндекс Нейро: архитектура и оптимизация</h3>
-      <p>Архитектура: 16 реплик → BERT-ранжирование → выбор ~5 источников → генеративная модель. <strong>Принципиальное отличие от ChatGPT/Gemini: параметрическое знание не используется — только переданные источники.</strong> Нейро всегда цитирует из конкретных страниц.</p>
-
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Параметр</th><th>Яндекс Нейро</th><th>Google AIO</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Источников в ответе</strong></td><td>~5</td><td>~13</td></tr>
-            <tr><td><strong>Охват запросов</strong></td><td>68% информационных</td><td>49,9% всех</td></tr>
-            <tr><td><strong>Связь с органикой</strong></td><td>63% цитат из топ-5</td><td>38% из топ-10 (март 2026)</td></tr>
-            <tr><td><strong>Параметрическое знание</strong></td><td>Не используется</td><td>Частично</td></tr>
-            <tr><td><strong>Платное попадание</strong></td><td>Невозможно</td><td>Невозможно</td></tr>
-            <tr><td><strong>Управление через robots.txt</strong></td><td>YandexAdditional (2–14 дней)</td><td>GPTBot / Google-Extended</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p>Стратегия для Яндекс Нейро совпадает с классическим SEO: попасть в топ-5 органики → попасть в ответ Нейро → попасть в ответ Алисы. Три цели — одна стратегия.</p>
-
-      <div class="callout">
-        Управление: <code>User-agent: YandexAdditional</code> в robots.txt отключает использование контента в Нейро и Быстрых ответах. Применяется через 2–14 дней. Используется если нежелательно попадание в Нейро (например, для коммерческих страниц без информационного контента).
-      </div>
-
-      <hr>
-
-      <!-- SECTION 6 -->
-      <div class="section-label"><span class="section-num">6</span> Мониторинг</div>
-      <h2 id="monitoring">Мониторинг: позиции и AI-цитирования</h2>
-
-      <p>Публикация — не финальная точка. Через 30 дней /tracker проверяет реальное состояние статьи и формирует action items для /page-optimizer. Затем мониторинг каждые 90 дней.</p>
-
-      <h3 id="tracker">Tracker: что проверяется</h3>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Источник</th><th>Данные</th><th>Метод</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Яндекс Webmaster API</strong></td><td>Позиции по ключам, клики, CTR, impressions</td><td>API query-analytics, период 7 дней минус 3 дня задержки</td></tr>
-            <tr><td><strong>Google Search Console API</strong></td><td>Позиции, клики, CTR по ключам</td><td>Service account + googleapiclient, опционально</td></tr>
-            <tr><td><strong>Perplexity</strong></td><td>Цитирует ли AI статью на целевой запрос</td><td>WebFetch / WebSearch по запросу</td></tr>
-            <tr><td><strong>Яндекс Нейро</strong></td><td>AI-блок, наличие ссылки на статью</td><td>WebSearch или WebFetch</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p>По результатам tracker генерирует action items в <code>pipeline.md</code> секция «Tracking log»:</p>
-      <ul>
-        <li>Позиция 4–10 → добавить H2-раздел или расширить FAQ</li>
-        <li>Позиция 11–20 → добавить внутренних ссылок</li>
-        <li>Не в топ-100 → проверить индексацию</li>
-        <li>Perplexity не цитирует → усилить definition-блок с прямым ответом</li>
-        <li>Яндекс AI не цитирует → переработать первый абзац</li>
-      </ul>
-
-      <h3 id="optimizer">Page optimizer: хирургическая доработка</h3>
-      <p>/page-optimizer читает action items и точечно вносит правки — не переписывает статью. Принцип: минимальное изменение с максимальным эффектом на позицию. Статьи в зоне 4–10 имеют наибольший ROI доработки — они уже ранжируются, нужен небольшой сигнал для перехода в топ-3.</p>
-
-      <div class="callout gold">
-        <strong>llms.txt:</strong> после каждой публикации /publisher обновляет <code>llms.txt</code> — файл в формате llmstxt.org, который LLM-краулеры используют при индексации. Новые статьи добавляются в секцию «## Блог» в начало (свежий контент важнее для LLM-индексации). Деплоится на сервер через SSH.
-      </div>
-
-      <h3 id="link-check">/link-check — гигиена ссылок (вспомогательный скилл)</h3>
-      <p>Служебный скилл для регулярной проверки сайта на битые ссылки — не часть основного контент-пайплайна, а техническая гигиена между публикациями. Краулит по sitemap, проверяет внутренние и внешние ссылки, отсекает шум (WP-служебка, шрифтовые CDN, трекеры) и разделяет результат на действительно мёртвые (404/410/5xx) и непроверенные из-за бот-блока (403/429/timeout) — чтобы не гоняться за ложными срабатываниями. Запуск: <code>/link-check &lt;домен&gt;</code>.</p>
-
-
-      <div class="section-label"><span class="section-num">7</span> Автономность</div>
-      <h2 id="agency">Автономное агентство: конвейер без человека в цикле</h2>
-      <p>С 20 августа 2026 пайплайн работает не как набор скиллов, которые запускает человек, а как <strong>агентство на сервере</strong>: оно само выбирает работу, само её делает, само проверяет и в определённых пределах — само публикует. Человек остаётся владельцем, а не оператором: его слово нужно там, где решение стратегическое, и не нужно там, где оно ритуал.</p>
-
-      <h3>Планировщик-портфель вместо очереди задач</h3>
-      <p>Каждую среду планировщик собирает неделю работ из сигналов: позиции и клики, заявки из CRM по страницам, очередь углубления (по каким запросам страница уже ранжируется, но ответа в тексте нет), дыры относительно конкурентов, перепись «страниц без пути в лид». Бюджет недели раскладывается по корзинам — <strong>верное / ставки роста / инфраструктура / разведка</strong> — и тратится целиком: пустых недель не бывает, отказ от работы всегда идёт с заменой.</p>
-
-      <div class="callout">
-        <strong>Ключевой принцип:</strong> лиды дают услуги и инструменты, не статьи. Перепись парка показала: две трети инфо-страниц не имели ни одной ссылки на услугу — трафик приходил и утекал. Теперь «путь в лид» — обязательство: конвейер не выпустит страницу без контекстной ссылки на релевантную услугу, а дешёвый маршрут-линкер ставит такие ссылки на существующие страницы по очереди, ранжированной спросом.
-      </div>
-
-      <h3>Механические стражи вместо инструкций</h3>
-      <p>Урок, оплаченный практикой: инструкция «не делай X» в промпте — не барьер. Барьер — это код, который проверяет результат. Перед каждым согласованием страница проходит два независимых взгляда:</p>
-      <ul>
-        <li><strong>mech_gates</strong> — стиль как код: тире, запрещённые обороты, структура, чужая вёрстка (классы, для которых у целевого сайта нет CSS-правил), картинки с чужих доменов;</li>
-        <li><strong>selfcheck</strong> — взгляд на собранную страницу: знает ли сайт эту разметку (словарь выводится из живых страниц, а не из чьей-то памяти), живы ли картинки, не разъехалась ли вложенность, есть ли путь в лид.</li>
-      </ul>
-      <p>Для точечных правок оба стража работают в режиме <strong>baseline</strong>: сравнивают с прежней версией страницы и валят только то, что появилось. Работа «добавь одно предложение» не обязана отвечать за ритм текста 2023 года.</p>
-
-      <h3>Ярусы согласования: слово владельца — там, где оно решает</h3>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Ярус</th><th>Правило</th><th>Что на нём</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Тир 0 — сам</strong></td><td>Вопрос не задаётся. Механический страж: добавлено одно предложение и одна ссылка, ничего не удалено, обе проверки чисты</td><td>Путь в лид на существующей странице</td></tr>
-            <tr><td><strong>Окно вето</strong></td><td>Предупреждение «опубликую сам через 20 ч». Молчание = «да», «нет» отменяет</td><td>Дожимы существующих страниц, перерисовка схем, снятие битых картинок</td></tr>
-            <tr><td><strong>Слово</strong></td><td>Молчание 48 ч = «нет», работа выбрасывается</td><td>Новые статьи в бой, смена заголовков</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout green">
-        <strong>Самостоятельность держится на обратимости.</strong> Каждая публикация пишется в журнал с указанием, чьим решением она была; прежний текст страницы хранится. Любая ушедшая без слова правка отменяется одной фразой в чат — «откати &lt;имя-прогона&gt;». Если после конвейера страницу правил кто-то ещё, откат откажется вслух, а не затрёт чужую работу. Утренний пульс показывает всё, что уехало без слова владельца, с рычагом отката на каждой строке.
-      </div>
-
-      <h3>Кто за чем смотрит</h3>
-      <ul>
-        <li><strong>Ревизор</strong> судит каждый шаг модели по артефактам: шаг без result.json — не сделанный шаг, какой бы убедительной ни была пометка «готово»;</li>
-        <li><strong>Сторож</strong> ловит не падения (их лечит systemd), а зависания: шаг дольше таймаута, очередь молчит, код обновился, а процесс держит старый. Отдельно сверяет «остановленные» прогоны с сайтом — работа могла доехать другим путём;</li>
-        <li><strong>Сверка после публикации</strong> сравнивает живую страницу с тем, что реально уехало (а не с самой собой — на этой ошибке однажды «сошлась» страница, не менявшаяся с 2022 года);</li>
-        <li><strong>Пульс</strong> раз в день отвечает на три вопроса: что сделано, что дальше, живо ли агентство.</li>
-      </ul>
-
-      <p>Цена вопроса: суточный бюджет токенов с правилом «начатую работу доводим до конца» — потолок, срабатывающий посреди прогона, оставлял написанный текст без согласования до утра. Незаконченная работа не экономит бюджет: она его уже потратила.</p>
-
+      <div class="callout green"><strong>Скиллы открыты.</strong> 30 скиллов лежат в <a href="https://github.com/ironfelix/ai-content-pipeline">репозитории на GitHub</a> под лицензией MIT. Описание, схема и запуск за четыре шага: <a href="https://ivanilin.ru/skills/">ivanilin.ru/skills</a>.</div>
+      <div class="section-label"><span class="section-num">1</span> Что изменилось в SEO</div>
+<h2 id="s1">Что изменилось в SEO</h2>
+<p>AI Overviews появляются в 49,9% запросов в Google. Кликабельность первой позиции с их появлением упала на 58% (Ahrefs, декабрь 2025). Яндекс Нейро отвечает на 68% информационных запросов.</p>
+<p>Посетители из ИИ-ответов становятся клиентами чаще обычных: в 23 раза по данным Ahrefs и в 6 раз по данным Webflow. Раньше задачей было подняться в выдаче, теперь нужно, чтобы страницу цитировали. Корреляция с цитированием в AI Overviews у упоминаний бренда 0,664, у ссылок 0,218.</p>
+<p>Утечка документации Google Content Warehouse API и показания на суде Минюста США против Google раскрывают, как устроено ранжирование. Главная система переранжирования, NavBoost, учитывает клики, и больше всего для неё значит последний долгий клик в сессии. Поисковик оценивает, насколько сайт авторитетен и насколько страница близка к его основной теме.</p>
+<p>Отсюда правило для конвейера: статья отвечает на все связанные подзапросы. Так страница ближе к основной теме сайта, а нейросеть находит в ней ответ целиком.</p>
+<div class="section-label"><span class="section-num">2</span> Архитектура</div>
+<h2 id="s2">Архитектура</h2>
+<p>У каждой статьи есть файл <code>pipeline.md</code>, где записано, на каком она этапе. Его создаёт <code>/researcher</code>, а каждый следующий скилл добавляет в него запись о своём шаге. <code>/publisher</code> читает его перед публикацией. Если у шага статус «ждёт», «ошибка» или BLOCK, статья не выходит.</p>
+<p>Скиллы не зависят от проекта: голос, методология, доступы и запретные темы клиента хранятся в его настройках. Код скиллов одинаков для всех проектов.</p>
+<p>Скиллы-проверки выносят одно из двух решений: пропустить текст или заблокировать. <code>/quality-gate</code> возвращает статью, пока в ней остаются лишние тире. <code>/methodology-gate</code> останавливает текст, если в нём неверно описан продукт клиента.</p>
+<p>В ручном режиме человек решает в двух местах. Новая статья выходит после слова «публикуем», правка опубликованной страницы после слова «обновляем». В серверном режиме действуют уровни согласования из раздела 9.</p>
+<div class="section-label"><span class="section-num">3</span> Редактура: пять проверяющих</div>
+<h2 id="s3">Редактура: пять проверяющих</h2>
+<p>За один проход <code>/editor</code> не удерживал все правила: из 60 правил что-то всегда пропускал. Теперь он запускает четырёх проверяющих, и они читают статью параллельно. Пятый запускается после них.</p>
+<table>
+<thead>
+<tr>
+<th>Проверяющий</th>
+<th>Что ловит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Р1 ИИ и стиль</td>
+<td>машинные конструкции, штампы, кальки, тире</td>
+</tr>
+<tr>
+<td>Р2 Аудитория и тон</td>
+<td>сужение аудитории, пустая категоричность, снисходительность</td>
+</tr>
+<tr>
+<td>Р3 Структура</td>
+<td>повторы блоков, слабый лид, FAQ расходится с основным текстом</td>
+</tr>
+<tr>
+<td>Р4 Язык и грамматика</td>
+<td>повторы слов, согласование, канцелярит</td>
+</tr>
+<tr>
+<td>Р5 Живой язык</td>
+<td>добавляет голос, ритм и конкретный образ</td>
+</tr>
+</tbody>
+</table>
+<p>Р1–Р4 вычищают ошибки, но текст может пройти их все и остаться гладким и мёртвым. Р5 запускается последним и оценивает, похоже ли, что статью писал живой эксперт. В наших тестах он поднимал оценку «похоже на человека» с 7–7,5 до 9 из 10.</p>
+<p>Потом текст читают ещё два скилла. <code>/kalki</code> показывает проверяющим предложения по одному и вразбивку: среди соседних фраз кальку не замечают даже опытные редакторы. В список подмешаны контрольные кальки, по ним видно, не купился ли проверяющий на гладкость фразы.</p>
+<p><code>/redaktura-pass</code> работает по методу Людмилы Сарычевой и Никиты Архипова. Он ищет разные слова для одной сущности, расплывчатые оценки («заметно», «в разы») и оценочные анонсы.</p>
+<div class="section-label"><span class="section-num">4</span> Проверки перед публикацией</div>
+<h2 id="s4">Проверки перед публикацией</h2>
+<p><code>/quality-gate</code> делает 39 проверок. Двадцать шесть из них останавливают публикацию, остальные тринадцать отмечают замечания, но результат не меняют. Статья либо проходит, либо получает список нарушений и уходит на правку.</p>
+<p><code>/quality-gate</code> проверяет:
+- структуру: H1 с целевым запросом, оглавление с якорями, FAQ из четырёх и более вопросов;
+- объём и ссылки: от 1 500 слов, от двух до четырёх внутренних ссылок, не больше одной коммерческой;
+- стоп-слова: «следует отметить», «важно понимать», «таким образом», «данный», «является»; любое из них валит проверку;
+- первый абзац: прямой ответ, который ИИ может процитировать без контекста;
+- кейс: кроме цифр нужна конкретика, например, что именно нашли и что было сломано;
+- Information Gain: нужен свой кейс, наблюдение из практики или данные, которых нет в чужих статьях; пересказ конкурентов проверку не пройдёт;
+- внутренние данные: цифры клиентов и компании с пометкой «непублично» в текст не попадают.</p>
+<p><code>/methodology-gate</code> ловит искажения смысла: этапы, роли и условия, которые <code>/writer</code> придумал сам.</p>
+<div class="section-label"><span class="section-num">5</span> Что мы поменяли, когда сравнили наши статьи с текстами людей</div>
+<h2 id="s5">Что мы поменяли, когда сравнили наши статьи с текстами людей</h2>
+<p>26 сентября 2026 мы сравнили тексты конвейера с 550 страницами двух сайтов, которые писали люди. Сильнее всего машинный текст выдают подводки с двоеточием: «Правило простое: …», «Итог: …». У людей двоеточие встречается в 24% абзацев, у конвейера в 66%. Выросло это из нашего же правила заменять тире на двоеточие.</p>
+<p>После сравнения мы поменяли четыре правила:
+- <code>/writer</code> и <code>/editor</code> больше не заменяют тире на двоеточие;
+- если в статье больше трёх подводок с двоеточием, текст уходит обратно к <code>/editor</code>;
+- <code>/writer</code> описывает разницу двумя отдельными утверждениями, без антитез, и в каждой статье пишет, кому совет не подойдёт и как проверить результат;
+- <code>/editor</code> сравнивает текст до и после своей правки и ловит новые повторы и пропавшие цифры.</p>
+<div class="section-label"><span class="section-num">6</span> GEO: за что нейросети цитируют страницу</div>
+<h2 id="s6">GEO: за что нейросети цитируют страницу</h2>
+<p>Исследование Принстона о GEO проверило 10 приёмов оптимизации на 10 000 запросах в Perplexity. Метрика PAWC показывает долю слов ответа, взятых из вашего источника, с поправкой на позицию.</p>
+<table>
+<thead>
+<tr>
+<th>Приём</th>
+<th>Прирост PAWC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ссылки на авторитетные источники</td>
+<td>+42,6%</td>
+</tr>
+<tr>
+<td>Конкретные числа вместо общих слов</td>
+<td>+32,8%</td>
+</tr>
+<tr>
+<td>Короткие и чёткие предложения</td>
+<td>+28,7%</td>
+</tr>
+<tr>
+<td>Прямые цитаты экспертов</td>
+<td>+27,7%</td>
+</tr>
+</tbody>
+</table>
+<p>Сайтам на позициях 5–10 ссылки на источники прибавили 115%. В топ-3 прирост был 40%. Если насыщать текст ключевыми словами, результат падал. Лучше всего сработало сочетание чётких формулировок и чисел: +61,5%.</p>
+<p>В Growth Memo разобрали 4 млн URL: 44% цитат в AI Overviews взяты из первой трети страницы. Поэтому <code>/writer</code> отвечает на вопрос уже в первом абзаце, а <code>/quality-gate</code> не пропускает вводные определения. По данным Authoritas, с разметкой FAQPage шанс попасть в AI Overview выше на 40%, и <code>/seo-optimizer</code> добавляет её в каждую статью с FAQ.</p>
+<div class="section-label"><span class="section-num">7</span> Яндекс и Нейро</div>
+<h2 id="s7">Яндекс и Нейро</h2>
+<p>Яндекс занимает 74% поискового рынка России (май 2025). Поведенческие сигналы там важнее ссылок, и главным остаётся последний долгий клик. Статистика копится 1–2 недели, а в Google окно агрегации составляет 13 месяцев. Накрутку поведенческих факторов Яндекс распознаёт и наказывает потерей трафика.</p>
+<p>Нейро строит ответ только из переданных источников и не опирается на то, что модель знает сама. Отключить использование контента в Нейро можно директивой <code>YandexAdditional</code> в <code>robots.txt</code>, она вступает в силу за 2–14 дней.</p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Яндекс Нейро</th>
+<th>Google AIO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Источников в ответе</td>
+<td>около 5</td>
+<td>около 13</td>
+</tr>
+<tr>
+<td>Охват запросов</td>
+<td>68% информационных</td>
+<td>49,9% всех</td>
+</tr>
+<tr>
+<td>Цитаты из топа выдачи</td>
+<td>63% из топ-5</td>
+<td>38% из топ-10 (март 2026)</td>
+</tr>
+</tbody>
+</table>
+<p>Стратегия для Нейро совпадает с классическим SEO: попасть в топ-5 обычной выдачи, а оттуда в ответы Нейро и Алисы.</p>
+<div class="section-label"><span class="section-num">8</span> После публикации</div>
+<h2 id="s8">После публикации</h2>
+<p><code>/tracker</code> проверяет статью через 30 дней, затем каждые 90. Он смотрит позиции в Яндекс Вебмастере и Search Console и проверяет, цитируют ли статью Perplexity и Яндекс Нейро. По тому, как изменились позиции, <code>/page-optimizer</code> получает задачи.</p>
+<p><code>/page-optimizer</code> правит статьи на позициях 4–10: добавляет раздел под недостающий ключ, расширяет FAQ и переписывает первый абзац. В ручном режиме правки выходят после слова «обновляем», в серверном действуют уровни согласования.</p>
+<p>Отдельно <code>/linker</code> проходит по опубликованным информационным статьям и ставит ссылку на услугу туда, где её нет. Проверка всех страниц показала, что у двух третей информационных страниц не было ни одной такой ссылки: трафик приходил и уходил. <code>/linker</code> берёт страницы в работу по убыванию спроса.</p>
+<div class="section-label"><span class="section-num">9</span> Серверный режим</div>
+<h2 id="s9">Серверный режим</h2>
+<p>С 20 августа 2026 года конвейер работает на сервере сам: выбирает задачи, выполняет их, проверяет и в заданных пределах публикует. Владелец проекта принимает решения, рутину делает конвейер.</p>
+<p><strong>Планировщик.</strong> Каждую среду он составляет план на неделю по данным: позиции, заявки из CRM по страницам, статьи в очереди на углубление и темы, которые есть у конкурентов, но нет у сайта. Бюджет недели он делит на четыре части: на то, что уже работает, на эксперименты для роста, на инфраструктуру и на разведку.</p>
+<p><strong>Стилевой контроль и контроль страницы.</strong> Результат проверяет код, потому что запрет в промпте модель может нарушить. Перед согласованием страницу смотрят две независимые проверки.</p>
+<p>Стилевой контроль работает скриптом. Он ищет тире, запрещённые обороты, проблемы со структурой и вёрстку, перенесённую с других сайтов (классы, для которых на сайте нет стилей). Контроль страницы смотрит на готовую страницу: есть ли для её разметки стили на сайте, открываются ли картинки, ведёт ли страница к услуге.</p>
+<p>При точечных правках оба контроля сравнивают текст с прежней версией и бракуют только то, что появилось после правки.</p>
+<p><strong>Уровни согласования.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Уровень</th>
+<th>Правило</th>
+<th>Что на нём</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Сам</td>
+<td>владельца не спрашивают, если правка добавила одно предложение и одну ссылку, ничего не удалила и обе проверки прошли</td>
+<td>ссылка на услугу на уже опубликованной странице</td>
+</tr>
+<tr>
+<td>Срок на отмену</td>
+<td>конвейер предупреждает «опубликую через 20 ч», и если владелец молчит, публикует</td>
+<td>дожим страниц, перерисовка схем, снятие битых картинок</td>
+</tr>
+<tr>
+<td>Слово владельца</td>
+<td>если за 48 часов ответа нет, это «нет»</td>
+<td>новые статьи, смена заголовков</td>
+</tr>
+</tbody>
+</table>
+<p>Конвейеру можно дать работать самостоятельно, потому что каждую его публикацию можно отменить, пока страницу не правил человек. Конвейер пишет каждую публикацию в журнал и хранит прежний текст. Правку, которую владелец не одобрял, отменяет фраза «откати &lt;название работы&gt;». Если после конвейера страницу правил другой человек, откат не сработает и чужие правки не затрёт.</p>
+<p><strong>Кто за чем следит.</strong> Ревизор проверяет шаг по файлам, которые после него остались. Сторож отлавливает зависания, а после падения процесс перезапускает systemd. После публикации конвейер проверяет, совпадает ли страница на сайте с тем, что отправили. Раз в день приходит сводка: что сделано, что дальше, работает ли конвейер.</p>
+<div class="section-label"><span class="section-num">10</span> История обновлений</div>
+<h2 id="s10">История обновлений</h2>
+<ul>
+<li><strong>Июнь 2026.</strong> Первая версия: 11 скиллов, файл состояния, quality-gate.</li>
+<li><strong>20 августа.</strong> Серверный режим: планировщик, стилевой контроль и контроль страницы, уровни согласования.</li>
+<li><strong>11 сентября.</strong> Иллюстрации подбираются под смысл раздела: каталог из 40 форм, места под них размечены как <code>[ВИЗУАЛ: …]</code>, чужие скриншоты не копируются.</li>
+<li><strong>26 сентября.</strong> Правки по сравнению с текстами людей и защита от утечки внутренних данных.</li>
+<li><strong>Октябрь.</strong> <code>/kalki</code> и <code>/redaktura-pass</code> выделили в отдельные циклы редактуры.</li>
+<li><strong>Ноябрь.</strong> Новые скиллы: <code>/pipeline-check</code>, <code>/landing</code>, <code>/crm-competitors</code>, <code>/hypothesis-check</code>, <code>/incident-duty</code>.</li>
+</ul>
     </article>
   </div>
 </div>
 
-<!-- CTA -->
 <div class="wrap">
   <div class="cta-block">
     <h2>Этот пайплайн работает в AgentIQ</h2>
-    <p>Те же агенты, стражи и knowledge-base строят контент для маркетплейсов в AgentIQ — а автономное агентство этой методологией ведёт SEO двух живых сайтов.</p>
+    <p>Те же скиллы и проверки строят контент для маркетплейсов в AgentIQ, а серверный режим ведёт по этой методологии SEO двух живых сайтов.</p>
     <a href="https://agentiq.ru" class="btn-blue">Узнать про AgentIQ →</a>
     <a href="geo-aeo-protocol.html" class="btn-ghost">Протокол GEO/AEO →</a>
   </div>
