@@ -153,6 +153,14 @@ hr{border:none;border-top:1px solid var(--border);margin:36px 0}
 </style>
 </head>
 <body>
+  <aside style="margin:16px auto;padding:16px;max-width:960px">
+    <strong>Как использовать протокол.</strong> Рыночные замеры ниже зависят от выборки и версии движка.
+    Прирост видимости оцениваем на своей панели запросов. Хорошая индексация, точный ответ на интент и
+    проверяемые первичные данные важнее шаблонов. Для AI Overviews и AI Mode отдельная разметка не требуется.
+    <a href="index.html#s7">Актуальная методология AgentIQ</a> ·
+    <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">Руководство Google</a>
+  </aside>
+
 
 <nav class="nav">
   <div class="nav-inner">
@@ -376,7 +384,7 @@ hr{border:none;border-top:1px solid var(--border);margin:36px 0}
         <li>H2/H3 как вопросы из PAA → абзац 40–60 слов с прямым ответом</li>
         <li>Lists: 5–8 пунктов (Google усекает &gt;8); H3 как пункты списка</li>
         <li>Tables: настоящие <code>&lt;table&gt;</code>, не div-flexbox — extractable как структурированные данные</li>
-        <li>FAQPage schema + inline citations: <strong>+40% к вероятности отбора в AI-ответы</strong> (Authoritas 2025); +3× к цитированию в ChatGPT</li>
+        <li>FAQ и ссылки на первоисточники добавляем по пользе для читателя. Эффект FAQPage на цитирование не подтверждён. Google больше не показывает FAQ rich results.</li>
         <li>SpeakableSpecification schema для блоков, читаемых ассистентами; 65% голосовых поисков начинаются с вопросительных слов</li>
       </ul>
 
@@ -475,7 +483,7 @@ hr{border:none;border-top:1px solid var(--border);margin:36px 0}
           <div class="gap-letter">E</div>
           <div>
             <div class="gap-title">Schema-стек неполный</div>
-            <div class="gap-desc">Есть Article + FAQPage. Критично добавить: Review + AggregateRating, SoftwareApplication или Product, ItemList для «Best of», BreadcrumbList, Person с worksFor, Organization на homepage. Кейс Previsible: SoftwareApplication schema → +150% AI traffic за 90 дней.</div>
+            <div class="gap-desc">Есть Article + FAQPage. Проверить подходящие типы по назначению страницы и требованиям целевой площадки. Review и AggregateRating использовать только с реальными видимыми отзывами и при соответствии правилам площадки. Кейс Previsible: SoftwareApplication schema → +150% AI traffic за 90 дней.</div>
           </div>
         </div>
         <div class="gap-item">
@@ -556,7 +564,7 @@ hr{border:none;border-top:1px solid var(--border);margin:36px 0}
         <li><strong>ChatGPT доминирует, но Claude растёт 12,8× YoY.</strong> ~80–84% AI referral — ChatGPT. Не зацикливаться — Gemini и Claude растут быстрее.</li>
         <li><strong>Crawl-to-referral ratio.</strong> ClaudeBot 23 951:1 (нагрузка без отдачи), PerplexityBot ~110:1, GPTBot 1 276:1. При инфраструктурных проблемах — приоритизировать Perplexity и OpenAI.</li>
         <li><strong>Knowledge Graph Clarity Cleanup.</strong> Июнь 2025: Google удалил 3 млрд сущностей. Рассогласованность Wikipedia/Wikidata/sameAs снижает entity confidence.</li>
-        <li><strong>llms.txt — гигиена без эффекта.</strong> John Mueller: «No AI system currently uses llms.txt». Adobe аудит на 1000 доменов — 0 обращений. 30 мин на внедрение как future-proofing, но не приоритет.</li>
+        <li><strong>llms.txt опционален.</strong> Google не требует его для AI Overviews и AI Mode. Ведём файл только для системы, которой он нужен, и отдельно проверяем его использование.</li>
       </ul>
 
       <hr>
@@ -573,7 +581,7 @@ hr{border:none;border-top:1px solid var(--border);margin:36px 0}
         </ol>
       </div>
 
-      <p>Pillar + Spoke + Single review + VS-страницы — обязательная архитектура. Entity-graph через @id-consistency и Wikidata — фундамент. YouTube — самый недооценённый AI-канал. Reddit — высокорисковый, но мощный. llms.txt — гигиена без эффекта.</p>
+      <p>Выбирайте архитектуру по интентам и проверенной фактуре. Разметку согласуйте с видимым содержимым и требованиями конкретной площадки. YouTube — самый недооценённый AI-канал. Reddit — высокорисковый, но мощный. llms.txt — опция для конкретного потребителя.</p>
 
     </article>
   </div>
